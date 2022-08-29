@@ -55,6 +55,38 @@ EOF
 
 ####
 #
+#   GENERATE UNIT FILE FOR DATA COLLECTION
+#
+####
+
+
+cat > configuration/collect_data.service <<EOF
+[Unit]
+Description=Collect data from IAQ sensors and send to central DB
+Requires=network-online.target
+PartOf=docker.service
+After=docker.service
+
+[Service]
+User=${USER_ON_RASPI}
+Restart=always
+Group=docker
+WorkingDirectory=/iaq-arrs/data_acquisition/docker/
+# Shutdown container (if running) when unit is started
+ExecStartPre=docker-compose -f docker-compose.yml down
+# Start container when unit is started
+ExecStart=docker-compose -f docker-compose.yml up
+# Stop container when unit is stopped
+ExecStop=docker-compose -f docker-compose.yml down
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
+
+####
+#
 #   GENERATE UNIT FILE FOR REVERSE PROXY
 #
 ####
@@ -171,7 +203,7 @@ cat > configuration/telegraf.conf <<EOF
   urls = ["http://${SERVER_IP}:8086"]
 
   ## Token for authentication.
-  token = "$INFLUX_TOKEN"
+  token = "$TELEGRAF_TOKEN_PLACEHOLDER"
 
   ## Organization is the name of the organization you wish to write to; must exist.
   organization = "${INFLUX_ORG}"

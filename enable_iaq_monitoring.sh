@@ -19,15 +19,16 @@ fi
 ####
 
 
-# GET THE CODE FROM GIT
-#git clone https://github.com/nikih94/iaq-arrs
-
-
 #move telegraf configuration in /etc/telegraf/telegraf.conf
-
+cp ./configuration/telegraf.conf /etc/telegraf/telegraf.conf
 #copy the telegraf token into
-echo "INFLUX_TOKEN=iOC-xleVA5cThnnsuquj6cB4etopUCa5e4farWi8AFLn5fzzaZDynjPYcB5-ICh4ZWpNwchcWUMKeLRunzk4Ug==" > /etc/default/telegraf
+echo "INFLUX_TOKEN=${TELEGRAF_TOKEN}" > /etc/default/telegraf
 
+#collect data service
+cp ./configuration/collect_data.service /etc/systemd/system/collect_data.service
+
+#tunnel service
+cp ./configuration/tunnel_to_ir.service /etc/systemd/system/tunnel_to_ir.service
 
 
 ####
@@ -37,9 +38,12 @@ echo "INFLUX_TOKEN=iOC-xleVA5cThnnsuquj6cB4etopUCa5e4farWi8AFLn5fzzaZDynjPYcB5-I
 ####
 
 
+sudo enable docker-compose daemon
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
 
 
-#enable docker-compose daemon
-#sudo systemctl enable docker.service
-#sudo systemctl enable containerd.service
+sudo systemctl enable telegraf.service
+sudo systemctl enable collect_data.service
+sudo systemctl enable tunnel_to_ir.service
 

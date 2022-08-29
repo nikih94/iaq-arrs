@@ -1,0 +1,40 @@
+version: "3.3"
+services:
+    data-collection:
+        container_name: data-collection
+        devices:
+            - '/dev/serial0:/dev/serial0'
+        build: data-collection/.
+        restart: always
+        extra_hosts:
+            #the container can reference the host machine with host.docker.internal
+            - 'host.docker.internal:host-gateway'
+        depends_on:
+            #prevents container to start before other container, on which it depends
+            - database
+        command: sh -c "cd ./iaq-arrs/data_acquisition/ && python collect_data.py"
+        volumes:
+            #- ./data-collection/log:/arrs_or/data_acquisition/client/log
+            - ./..:/iaq-arrs/data_acquisition/
+            - ./../../configuration/configuration.ini:/iaq-arrs/data_acquisition/configuration.ini
+    database:
+        #build: database/.
+        image: mariadb:10.4.24
+        container_name: database
+        restart: always
+        #user: root #not good, to start container as root
+        environment:
+            MARIADB_ROOT_PASSWORD: eee43trele21
+            MARIADB_DATABASE: local-aq
+            MARIADB_USER: innorenew
+            MARIADB_PASSWORD: 22extrasecret45
+        volumes:
+            - ./database/my.cnf:/etc/mysql/my.cnf
+            - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+            #-  /opt/mysql_data:/var/lib/mysql #persistent storage on local machine
+            - mariadb-data:/var/lib/mysql
+        ports:
+            - '3306:3306'
+volumes:
+    mariadb-data:
+        external: true

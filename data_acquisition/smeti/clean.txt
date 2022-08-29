@@ -1,0 +1,9 @@
+OS:
+Raspberry OS 32=bit
+Debian Bullseye 28-01-2022
+
+
+Run commands:
+sudo rpi-update
+
+ps aux | grep ttyAMA0

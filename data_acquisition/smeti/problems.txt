@@ -1,0 +1,30 @@
+ttyAMA0 linked to bluetooth and UART together
+
+
+https://wiki.gentoo.org/wiki/Raspberry_Pi_Serial_Ports
+
+I followed this and enabled uart using: raspi-conf
+https://di-marco.net/blog/it/2020-04-18-tips-disabling_bluetooth_on_raspberry_pi/
+
+
+consoile usage: https://github.com/riptideio/pymodbus/tree/master/pymodbus/repl
+
+python3 pymodbus.console serial --method rtu --port /dev/ttyAMA0 --baudrate 19200 --timeout 2 --bytesize 8 --parity N --stopbits 2
+
+
+read this:
+https://forums.raspberrypi.com/viewtopic.php?t=244991
+
+also this
+
+https://docs.bitscope.com/pi-serial/
+
+
+INTERESTING:
+raspi-gpio get
+
+
+
+
+UPDATE RPI:
+sudo rpi-update
