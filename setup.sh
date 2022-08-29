@@ -98,7 +98,7 @@ Description=Setup a secure tunnel to IR
 After=network-online.target
 
 [Service]
-User=${USER}
+User=${USER_ON_RASPI}
 ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -R ${SERVER_PORT}:localhost:${RASPI_PORT} ${SENSOR_USER}@${SERVER_IP}
 
 # Restart every >2 seconds to avoid StartLimitInterval failure
