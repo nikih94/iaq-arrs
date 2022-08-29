@@ -195,7 +195,7 @@ The following sections must be performed on each raspi
 
 ##### Adjust configuration file
 
-Alter the configuration file by setting the **SENSOR_HOSTNAME** and **BUILDING** building variable.
+Alter the configuration file by setting the **SENSOR_HOSTNAME** and **BUILDING** and **SERVER_PORT** building variable.
 
 ##### Setup script
 
