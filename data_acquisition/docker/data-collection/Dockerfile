@@ -14,7 +14,7 @@ RUN apk add --no-cache git
 RUN set -ex && \
     apk add --no-cache gcc musl-dev
 
-RUN pip3 install minimalmodbus && pip3 install mysql-connector-python && pip3 install 'influxdb-client[ciso]' && pip3 install pyrsistent
+RUN pip3 install minimalmodbus && pip3 install mysql-connector-python==8.0.29 && pip3 install 'influxdb-client[ciso]' && pip3 install pyrsistent
 
 #RUN git clone https://gitlab.com/nikih94/arrs_or
 

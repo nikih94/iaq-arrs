@@ -1,0 +1,30 @@
+#!/bin/bash
+
+
+# Notify that the script must be run with sudo 
+if [[ $UID != 0 ]]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
+
+#update system
+sudo apt-get -y update
+sudo apt-get -y upgrade
+
+#then setup UART on raspi4
+sudo raspi-config nonint do_serial 1
+sudo cp /boot/my_config.txt /boot/config.txt
+
+
+#download docker install script
+curl -fsSL https://get.docker.com -o get-docker.sh
+
+sudo sh get-docker.sh
+sudo rm get-docker.sh
+
+
+#reboot 
+sudo reboot
+
