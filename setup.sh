@@ -99,7 +99,7 @@ After=network-online.target
 
 [Service]
 User=${USER_ON_RASPI}
-ExecStart=/usr/bin/ssh -NT -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -R ${SERVER_PORT}:localhost:${RASPI_PORT} ${SENSOR_USER}@${SERVER_IP}
+ExecStart=/usr/bin/ssh -NT -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -R ${SERVER_PORT}:localhost:${RASPI_PORT} ${SENSOR_USER}@${SERVER_IP}
 
 # Restart every >2 seconds to avoid StartLimitInterval failure
 RestartSec=5
