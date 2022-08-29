@@ -71,7 +71,8 @@ After=docker.service
 User=${USER_ON_RASPI}
 Restart=always
 Group=docker
-WorkingDirectory=/iaq-arrs/data_acquisition/docker/
+RestartSec="5min"
+WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/data_acquisition/docker/
 # Shutdown container (if running) when unit is started
 ExecStartPre=docker-compose -f docker-compose.yml down
 # Start container when unit is started
