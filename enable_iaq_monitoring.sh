@@ -18,6 +18,9 @@ fi
 #
 ####
 
+#create the local db volume 
+docker volume create mariadb-data
+
 
 #move telegraf configuration in /etc/telegraf/telegraf.conf
 cp ./configuration/telegraf.conf /etc/telegraf/telegraf.conf
@@ -38,7 +41,7 @@ sudo chown ${USER_ON_RASPI} /home/${USER_ON_RASPI}/.ssh/id_rsa.pub
 sudo chown ${USER_ON_RASPI} /home/${USER_ON_RASPI}/.ssh/known_hosts
 sudo chmod 400  /home/${USER_ON_RASPI}/.ssh/id_rsa 
 sudo chmod 400  /home/${USER_ON_RASPI}/.ssh/id_rsa.pub 
-sudo chmod 400  /home/${USER_ON_RASPI}/.ssh/known_hosts
+sudo chmod 600  /home/${USER_ON_RASPI}/.ssh/known_hosts
 #tunnel service
 cp ./configuration/tunnel_to_ir.service /etc/systemd/system/tunnel_to_ir.service
 
