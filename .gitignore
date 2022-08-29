@@ -1,3 +1,4 @@
 configuration/*
 configuration.sh
 configuration.ini
+ssh_keys/*

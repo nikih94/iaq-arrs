@@ -27,6 +27,10 @@ echo "INFLUX_TOKEN=${TELEGRAF_TOKEN}" > /etc/default/telegraf
 #collect data service
 cp ./configuration/collect_data.service /etc/systemd/system/collect_data.service
 
+#tunnel move keys
+mkdir -p /home/${USER_ON_RASPI}/.ssh
+echo ${SSH_PUBLIC} > /home/${USER_ON_RASPI}/.ssh/id_rsa.pub
+echo ${SSH_PRIVATE} > /home/${USER_ON_RASPI}/.ssh/id_rsa
 #tunnel service
 cp ./configuration/tunnel_to_ir.service /etc/systemd/system/tunnel_to_ir.service
 
