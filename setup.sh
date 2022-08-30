@@ -13,7 +13,7 @@ fi
 
 #check if the configuration is already updated
 
-if [[ -f "./status/configured" ]]
+if [[ -f "./status/configured.tmp" ]]
 then
     echo "System already configured."
     exit 0
@@ -23,7 +23,7 @@ echo "Start system configuration"
 
 cd ./iaq-arrs
 
-touch ./home/${USER_ON_RASPI}/status/configured
+touch /home/${USER_ON_RASPI}/status/configured.tmp
 
 
 

@@ -15,6 +15,8 @@ fi
 
 ### Set HOSTNAME
 
+echo "127.0.0.1    ${SENSOR_HOSTNAME}" |  sudo tee -a  /etc/hosts
+
 sudo hostnamectl set-hostname ${SENSOR_HOSTNAME}
 
 

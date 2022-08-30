@@ -27,6 +27,8 @@ sudo pip3 install docker-compose
 wget -qO- https://repos.influxdata.com/influxdb.key | sudo tee /etc/apt/trusted.gpg.d/influxdb.asc >/dev/null
 source /etc/os-release
 echo "deb https://repos.influxdata.com/${ID} ${VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+sudo apt-get -y install telegraf
+
 
 
 #Install firewall
@@ -67,7 +69,7 @@ EOF
 #move the servis to the correct DIR
 cp ./configuration/setup_iaq_monitoring.service /etc/systemd/system/setup_iaq_monitoring.service
 
-#The script will run only if the file /home/${USER_ON_RASPI}/status/configured exists
+#The script will run only if the file /home/${USER_ON_RASPI}/status/configured.tmp exists
 mkdir -p /home/${USER_ON_RASPI}/status
 
 #enable the service
