@@ -203,6 +203,19 @@ sudo dd if=/dev/mmcblk0 of=/home/niki/Desktop/ARRS/production_images/test.img
 
 ##### The following sections must be performed on each raspi
 
+Insert empty SD in laptop. Run the command to copy the image to the sd:
+
+```
+sudo dd if=/home/niki/Desktop/ARRS/production_images/test.img of=/dev/mmcblk0
+```
+
+*If this error occurs:    dd: writing to '/dev/sdc': No space left on device   look at this guides:  [one](https://www.cyberpunk.rs/clone-micro-sd-card) [two](https://linuxhint.com/how-to-clone-a-raspberry-pi-sd-card/#:~:text=Once%20your%20Raspberry%20Pi%20is,would%20take%20approximately%20fifteen%20minutes.)   *
+
+<br>
+<br>
+
+Insert the SD and perform the following:
+
 ###### Schedule a re-setup
 
 Delete the file /home/pi/status/configured.tmp
