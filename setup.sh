@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-. ./configuration.sh
+. ./iaq-arrs/configuration.sh
 
 
 # Notify that the script must be run with sudo 
@@ -13,7 +13,7 @@ fi
 
 #check if the configuration is already updated
 
-if [[ -f "/home/${USER_ON_RASPI}/status/configured" ]]
+if [[ -f "./status/configured" ]]
 then
     echo "System already configured."
     exit 0
@@ -21,9 +21,9 @@ fi
 echo "Start system configuration"
 
 
-cd /home/${USER_ON_RASPI}/iaq-arrs
+cd ./iaq-arrs
 
-touch /home/${USER_ON_RASPI}/status/configured
+touch ./home/${USER_ON_RASPI}/status/configured
 
 
 

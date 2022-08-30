@@ -58,7 +58,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/home/${USER_ON_RASPI}/iaq-arrs/.setup.sh
+ExecStart=cd /home/${USER_ON_RASPI} && ./iaq-arrs/setup.sh
 
 [Install]
 WantedBy=multi-user.target
