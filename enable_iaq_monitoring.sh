@@ -73,5 +73,8 @@ sudo systemctl enable tunnel_to_ir.service
 
 
 
+# Mark that the system was configured
+touch /home/${USER_ON_RASPI}/status/configured.tmp
+
 sudo reboot
 

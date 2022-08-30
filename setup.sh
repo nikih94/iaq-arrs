@@ -23,7 +23,6 @@ echo "Start system configuration"
 
 cd ./iaq-arrs
 
-touch /home/${USER_ON_RASPI}/status/configured.tmp
 
 
 
