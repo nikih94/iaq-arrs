@@ -42,8 +42,12 @@ sudo ufw enable
 sudo chmod 700 setup.sh enable_iaq_monitoring.sh
 
 
-
+#Load the configuration variables
 . ./configuration.sh
+
+
+#create the configuration dir if not exist
+mkdir -p configuration
 
 
 #Setup unit file that will run sripts setup.sh and enable_iaq_monitoring.sh 

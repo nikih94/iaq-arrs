@@ -27,10 +27,6 @@ touch /home/${USER_ON_RASPI}/status/configured
 
 
 
-#create the configuration dir if not exist
-mkdir -p configuration
-
-
 ####
 #
 #   GENERATE CONFIG FILE FOR DATA COLLECTION
