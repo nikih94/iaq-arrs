@@ -12,6 +12,13 @@ if [[ $UID != 0 ]]; then
 fi
 
 
+
+### Set HOSTNAME
+
+sudo hostnamectl set-hostname ${SENSOR_HOSTNAME}
+
+
+
 ####
 #
 #   MOVE CONFIGURATION FILES IN CORRECT DIRECTORIES
