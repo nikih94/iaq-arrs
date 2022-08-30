@@ -11,6 +11,17 @@ if [[ $UID != 0 ]]; then
     exit 1
 fi
 
+#check if the configuration is already updated
+
+if [[ -f "/home/${USER_ON_RASPI}/status/configured" ]]
+then
+    echo "System already configured."
+    exit 0
+fi
+echo "Start system configuration"
+
+
+cd /home/${USER_ON_RASPI}/iaq-arrs
 
 
 
@@ -63,9 +74,9 @@ EOF
 cat > configuration/collect_data.service <<EOF
 [Unit]
 Description=Collect data from IAQ sensors and send to central DB
-Requires=network-online.target
+Requires=docker.service
 PartOf=docker.service
-After=docker.service
+After=setup_iaq_monitoring.service
 
 [Service]
 User=${USER_ON_RASPI}
@@ -308,3 +319,7 @@ cat > configuration/telegraf.conf <<EOF
   ## Uncomment to remove deprecated metrics.
   # fielddrop = ["uptime_format"]
 EOF
+
+
+#Run the next script to enable iaq monitoring
+sudo ./enable_iaq_monitoring.sh

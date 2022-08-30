@@ -62,3 +62,7 @@ sudo systemctl enable telegraf.service
 sudo systemctl enable collect_data.service
 sudo systemctl enable tunnel_to_ir.service
 
+
+
+sudo reboot
+

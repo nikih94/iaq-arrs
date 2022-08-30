@@ -29,7 +29,51 @@ source /etc/os-release
 echo "deb https://repos.influxdata.com/${ID} ${VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 
 
+#Install firewall
+sudo apt-get -y install ufw
+# open ports, optional
+sudo ufw allow 22 
+#allow port to access local DB
+sudo ufw allow 3306
+sudo ufw enable
 
+
+#allow execution of configuration scripts
+sudo chmod 700 setup.sh enable_iaq_monitoring.sh
+
+
+
+. ./configuration.sh
+
+
+#Setup unit file that will run sripts setup.sh and enable_iaq_monitoring.sh 
+cat > configuration/setup_iaq_monitoring.service <<EOF
+[Unit]
+Description=Setup configuration and starts iaq monitoring
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/${USER_ON_RASPI}/iaq-arrs/.setup.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+#move the servis to the correct DIR
+cp ./configuration/setup_iaq_monitoring.service /etc/systemd/system/setup_iaq_monitoring.service
+
+#The script will run only if the file /home/${USER_ON_RASPI}/status/configured exists
+mkdir -p /home/${USER_ON_RASPI}/status
+
+#enable the service
+sudo systemctl enable setup_iaq_monitoring.service
+
+#stop the service
+sudo systemctl stop setup_iaq_monitoring.service
+
+#remove the configured file if it exists, so at the next boot, the system will be reconfigured
+sudo rm /home/${USER_ON_RASPI}/status/configured 
 
 #reboot 
 sudo reboot
