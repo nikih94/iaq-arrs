@@ -23,6 +23,8 @@ echo "Start system configuration"
 
 cd /home/${USER_ON_RASPI}/iaq-arrs
 
+touch /home/${USER_ON_RASPI}/status/configured
+
 
 
 #create the configuration dir if not exist
