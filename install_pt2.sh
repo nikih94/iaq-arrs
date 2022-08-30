@@ -61,7 +61,7 @@ After=network-online.target
 [Service]
 Type=oneshot
 WorkingDirectory=/home/${USER_ON_RASPI}
-ExecStart=bash ./iaq-arrs/setup.sh
+ExecStart=bash ./iaq-arrs/setup.sh && bash ./iaq-arrs/enable_iaq_monitoring.sh && touch ./status/configured.tmp && reboot
 
 [Install]
 WantedBy=multi-user.target
@@ -82,5 +82,3 @@ sudo systemctl stop setup_iaq_monitoring.service
 #remove the configured file if it exists, so at the next boot, the system will be reconfigured
 sudo rm /home/${USER_ON_RASPI}/status/configured 
 
-#reboot 
-sudo reboot

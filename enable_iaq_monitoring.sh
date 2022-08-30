@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-. ./configuration.sh
+. ./iaq-arrs/configuration.sh
 
 
 # Notify that the script must be run with sudo 
@@ -10,6 +10,20 @@ if [[ $UID != 0 ]]; then
     echo "sudo $0 $*"
     exit 1
 fi
+
+
+#check if the configuration is already updated
+
+if [[ -f "./status/configured.tmp" ]]
+then
+    echo "System already configured."
+    exit 0
+fi
+echo "Start system configuration"
+
+
+cd ./iaq-arrs
+
 
 
 
@@ -72,9 +86,4 @@ sudo systemctl enable collect_data.service
 sudo systemctl enable tunnel_to_ir.service
 
 
-
-# Mark that the system was configured
-touch /home/${USER_ON_RASPI}/status/configured.tmp
-
-sudo reboot
 

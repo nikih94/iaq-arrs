@@ -318,5 +318,3 @@ cat > configuration/telegraf.conf <<EOF
 EOF
 
 
-#Run the next script to enable iaq monitoring
-sudo ./enable_iaq_monitoring.sh
