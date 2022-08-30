@@ -181,32 +181,43 @@ Move the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) into `ssh
 The sensor is configured by setting variables in the file *configuration_template.sh* to the appropriate values. The file must be then renamed to: *configuration.sh*
 All variables are explained with comments.
 
+##### Set the raspi password
+
+Use the `passwd` command to set a new password
+
 ##### Installation scripts
 
 Run the two installation scripts respectively *install_pt1.sh* and *install_pt2.sh* the system will reboot between scripts.
 
 ##### DD command to replicate the system to all sensors
 
+* Insert the SD card in the laptop.
+* The SD card must NOT be mounted
+<br>
+List all attacheed devices `sudo fdisk -l`
+<br>
+Use the **dd** command to create a new image
 ```
-the dd command
+sudo dd if=/dev/mmcblk0 of=/home/niki/Desktop/ARRS/production_images/test.img
 ```
 
-The following sections must be performed on each raspi
+##### The following sections must be performed on each raspi
 
-##### Adjust configuration file
+###### Schedule a re-setup
+
+Delete the file /home/pi/status/configured.tmp
+<br>
+
+###### Adjust configuration file
 
 Alter the configuration file by setting the **SENSOR_HOSTNAME** and **BUILDING** and **SERVER_PORT** building variable.
 
-##### Setup script
+###### Set the wireless supplicant
 
-Run the script *setup.sh* that will generate configuration files in the folder *configuration*
+Copy a new *wpa_supplicant.conf* file into boot
 
-##### Enable application
+###### Sensors are now ready
 
-Run the script *enable_iaq_monitoring.sh* that will move configuration files in appropriate postions, set permissions and enable services.
-
-
-##### Sensors are now ready
 
 
 
