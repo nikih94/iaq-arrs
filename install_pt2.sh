@@ -12,6 +12,8 @@ if [[ $UID != 0 ]]; then
     exit 1
 fi
 
+#update apt
+sudo apt update
 
 #set docker non sudo account
 sudo usermod -aG docker ${USER_ON_RASPI}

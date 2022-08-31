@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-. ./configuration.sh
+. ./iaq-arrs/configuration.sh
 
 
 # Notify that the script must be run with sudo 
@@ -65,7 +65,7 @@ User=${USER_ON_RASPI}
 Restart=always
 Group=docker
 RestartSec="300"
-WorkingDirectory=/home/${USER_ON_RASPI}/clique-latency/latency_monitor/docker/
+WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/latency_monitor/docker/
 # Shutdown container (if running) when unit is started
 ExecStartPre=docker-compose -f docker-compose.yml down
 # Start container when unit is started
