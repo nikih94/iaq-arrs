@@ -334,3 +334,5 @@ cat > configuration/telegraf.conf <<EOF
 EOF
 
 
+
+echo "End iaq data collection setup ended"

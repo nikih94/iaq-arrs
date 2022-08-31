@@ -19,7 +19,7 @@ then
     echo "System already configured."
     exit 0
 fi
-echo "Start system configuration"
+echo "Start script enable_iaq_monitoring.sh"
 
 
 cd ./iaq-arrs
@@ -87,3 +87,4 @@ sudo systemctl enable tunnel_to_ir.service
 
 
 
+echo "end script enable_iaq_monitoring.sh"
