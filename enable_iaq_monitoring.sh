@@ -1,18 +1,14 @@
 #!/bin/bash
 
-echo "Start script enable_iaq_monitoring.sh"
-
-
 . ./iaq-arrs/configuration.sh
 
-echo "Start script enable_iaq_monitoring.sh"
+
 # Notify that the script must be run with sudo 
 if [[ $UID != 0 ]]; then
     echo "Please run this script with sudo:"
     echo "sudo $0 $*"
     exit 1
 fi
-echo "Start script enable_iaq_monitoring.sh"
 
 #check if the configuration is already updated
 
