@@ -82,4 +82,13 @@ EOF
 #move the unit file
 cp ./configuration/latency_monitor.service /etc/systemd/system/latency_monitor.service
 
+
+####
+#
+#   ENABLE and START SERVICES 
+#
+####
+
 sudo systemctl enable latency_monitor.service
+
+sudo systemctl start latency_monitor.service

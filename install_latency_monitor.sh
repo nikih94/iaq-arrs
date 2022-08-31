@@ -24,7 +24,7 @@ WorkingDirectory=/home/${USER_ON_RASPI}
 ExecStart=bash ./iaq-arrs/setup.sh 
 ExecStart=bash ./iaq-arrs/enable_iaq_monitoring.sh 
 ExecStart=bash ./iaq-arrs/setup_latency_monitor.sh
-ExecStart=bash ./iaq-arrs/verify_status.sh
+ExecStart=touch ./status/configured.tmp
 
 [Install]
 WantedBy=multi-user.target

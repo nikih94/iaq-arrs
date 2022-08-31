@@ -63,7 +63,7 @@ Type=oneshot
 WorkingDirectory=/home/${USER_ON_RASPI}
 ExecStart=bash ./iaq-arrs/setup.sh 
 ExecStart=bash ./iaq-arrs/enable_iaq_monitoring.sh 
-ExecStart=bash ./iaq-arrs/verify_status.sh
+ExecStart=touch ./status/configured.tmp
 
 [Install]
 WantedBy=multi-user.target
@@ -84,3 +84,15 @@ sudo systemctl stop setup_iaq_monitoring.service
 #remove the configured file if it exists, so at the next boot, the system will be reconfigured
 sudo rm /home/${USER_ON_RASPI}/status/configured.tmp
 
+
+
+####
+#
+#   ENABLE SERVICES
+#
+####
+
+
+sudo enable docker-compose daemon
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
