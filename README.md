@@ -191,12 +191,12 @@ Run the two installation scripts respectively *install_pt1.sh* and *install_pt2.
 
 ##### DD command to replicate the system to all sensors
 
+Do next steps:
 * Insert the SD card in the laptop.
 * The SD card must NOT be mounted
-<br>
-List all attacheed devices `sudo fdisk -l`
-<br>
-Use the **dd** command to create a new image
+* List all attacheed devices `sudo fdisk -l`
+* Use the **dd** command to create a new image
+
 ```
 sudo dd if=/dev/mmcblk0 of=/home/niki/Desktop/ARRS/production_images/test.img
 ```
