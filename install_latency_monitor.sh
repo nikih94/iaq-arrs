@@ -21,10 +21,10 @@ After=network-online.target
 [Service]
 Type=oneshot
 WorkingDirectory=/home/${USER_ON_RASPI}
-ExecStart=bash ./iaq-arrs/setup.sh 
-ExecStart=bash ./iaq-arrs/enable_iaq_monitoring.sh 
-ExecStart=bash ./iaq-arrs/setup_latency_monitor.sh
-ExecStart=bash ./iaq-arrs/verify_status.sh
+ExecStart=/bin/bash -c "./iaq-arrs/setup.sh" 
+ExecStart=/bin/bash -c "./iaq-arrs/enable_iaq_monitoring.sh" 
+ExecStart=/bin/bash -c "./iaq-arrs/setup_latency_monitor.sh" 
+ExecStop=/bin/bash -c "./iaq-arrs/verify_status.sh"
 
 [Install]
 WantedBy=multi-user.target
@@ -44,7 +44,7 @@ sudo systemctl enable setup_iaq_monitoring.service
 sudo systemctl stop setup_iaq_monitoring.service
 
 #remove the configured file if it exists, so at the next boot, the system will be reconfigured
-sudo rm /home/${USER_ON_RASPI}/status/configured 
+sudo rm /home/${USER_ON_RASPI}/status/configured.tmp
 
 
 #open port for avahi

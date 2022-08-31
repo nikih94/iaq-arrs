@@ -63,7 +63,6 @@ Type=oneshot
 WorkingDirectory=/home/${USER_ON_RASPI}
 ExecStart=/bin/bash -c "./iaq-arrs/setup.sh" 
 ExecStart=/bin/bash -c "./iaq-arrs/enable_iaq_monitoring.sh" 
-ExecStart=/bin/bash -c "echo third"
 ExecStop=/bin/bash -c "./iaq-arrs/verify_status.sh"
 
 [Install]
