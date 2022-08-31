@@ -42,6 +42,8 @@ sudo hostnamectl set-hostname ${SENSOR_HOSTNAME}
 #create the local db volume 
 docker volume create mariadb-data
 
+#copy the configuration file
+cp ./configuration/configuration.ini ./data_acquisition/configuration.ini
 
 #move telegraf configuration in /etc/telegraf/telegraf.conf
 cp ./configuration/telegraf.conf /etc/telegraf/telegraf.conf

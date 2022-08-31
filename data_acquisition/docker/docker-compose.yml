@@ -16,7 +16,7 @@ services:
         volumes:
             #- ./data-collection/log:/arrs_or/data_acquisition/client/log
             - ./..:/iaq-arrs/data_acquisition/
-            - ./../../configuration/configuration.ini:/iaq-arrs/data_acquisition/configuration.ini
+            #- ./../../configuration/configuration.ini:/iaq-arrs/data_acquisition/configuration.ini
     database:
         #build: database/.
         image: mariadb:10.4.24

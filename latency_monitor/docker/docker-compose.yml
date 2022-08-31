@@ -7,4 +7,4 @@ services:
     network_mode: "host"
     volumes:
       - ./..:/arrs_or/latency_monitor/
-      - ./../../configuration/configuration.ini:/arrs_or/latency_monitor/configuration.ini
+      #- ./../../configuration/configuration.ini:/arrs_or/latency_monitor/configuration.ini

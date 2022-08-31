@@ -77,6 +77,8 @@ EOF
 
 
 
+#copy the configuration file
+cp ./configuration/configuration.ini ./latency_monitor/configuration.ini
 
 
 #move the unit file
