@@ -3,7 +3,7 @@ services:
   network-latency:
     build: .
     container_name: avahi
-    restart: no
+    restart: "no"
     network_mode: "host"
     volumes:
       - ./..:/arrs_or/latency_monitor/
