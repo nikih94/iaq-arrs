@@ -1,6 +1,10 @@
 #!/bin/bash
 
 
+#Load the configuration variables
+. ./configuration.sh
+
+
 # Notify that the script must be run with sudo 
 if [[ $UID != 0 ]]; then
     echo "Please run this script with sudo:"
@@ -10,9 +14,9 @@ fi
 
 
 #set docker non sudo account
-sudo usermod -aG docker ${USER}
-sudo usermod -aG docker ${USER}
-groups ${USER}
+sudo usermod -aG docker ${USER_ON_RASPI}
+sudo usermod -aG docker ${USER_ON_RASPI}
+groups ${USER_ON_RASPI}
 
 
 
@@ -31,21 +35,8 @@ sudo apt-get -y install telegraf
 
 
 
-#Install firewall
-sudo apt-get -y install ufw
-# open ports, optional
-sudo ufw allow 22 
-#Do not port to access local DB (security is not ready)
-#sudo ufw allow 3306 
-sudo ufw enable
-
-
 #allow execution of configuration scripts
 sudo chmod 700 setup.sh enable_iaq_monitoring.sh
-
-
-#Load the configuration variables
-. ./configuration.sh
 
 
 #create the configuration dir if not exist

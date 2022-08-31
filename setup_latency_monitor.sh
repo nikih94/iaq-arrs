@@ -36,6 +36,8 @@ cd ./iaq-arrs
 
 
 cat >> ./configuration/configuration.ini <<EOF
+
+
 [network_latency]
 measurement_delta=60
 central_server_ip=${SERVER_IP}
@@ -62,7 +64,7 @@ After=setup_iaq_monitoring.service
 User=${USER_ON_RASPI}
 Restart=always
 Group=docker
-RestartSec="5min"
+RestartSec="300"
 WorkingDirectory=/home/${USER_ON_RASPI}/clique-latency/latency_monitor/docker/
 # Shutdown container (if running) when unit is started
 ExecStartPre=docker-compose -f docker-compose.yml down

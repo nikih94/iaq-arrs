@@ -25,6 +25,15 @@ sudo sh get-docker.sh
 sudo rm get-docker.sh
 
 
+#Install firewall
+sudo apt-get -y install ufw
+# open ports, optional
+sudo ufw allow 22 
+#Do not port to access local DB (security is not ready)
+#sudo ufw allow 3306 
+sudo ufw enable
+
+
 #reboot 
 sudo reboot
 
