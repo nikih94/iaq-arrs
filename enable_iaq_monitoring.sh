@@ -69,7 +69,7 @@ cp ./configuration/tunnel_to_ir.service /etc/systemd/system/tunnel_to_ir.service
 
 ####
 #
-#   ENABLE and START SERVICES 
+#   ENABLE SERVICES 
 #
 ####
 
@@ -78,9 +78,7 @@ sudo systemctl enable telegraf.service
 sudo systemctl enable collect_data.service
 sudo systemctl enable tunnel_to_ir.service
 
-sudo systemctl start telegraf.service
-sudo systemctl start collect_data.service
-sudo systemctl start tunnel_to_ir.service
+
 
 
 

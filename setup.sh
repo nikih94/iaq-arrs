@@ -89,13 +89,13 @@ cat > configuration/collect_data.service <<EOF
 Description=Collect data from IAQ sensors and send to central DB
 Requires=docker.service
 PartOf=docker.service
-After=setup_iaq_monitoring.service
+After=network-online.target
 
 [Service]
 User=${USER_ON_RASPI}
 Restart=always
 Group=docker
-RestartSec="5min"
+RestartSec="5min 20s"
 WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/data_acquisition/docker/
 # Shutdown container (if running) when unit is started
 ExecStartPre=docker-compose -f docker-compose.yml down

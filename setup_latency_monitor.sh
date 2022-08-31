@@ -85,10 +85,8 @@ cp ./configuration/latency_monitor.service /etc/systemd/system/latency_monitor.s
 
 ####
 #
-#   ENABLE and START SERVICES 
+#   ENABLE SERVICES 
 #
 ####
 
 sudo systemctl enable latency_monitor.service
-
-sudo systemctl start latency_monitor.service
