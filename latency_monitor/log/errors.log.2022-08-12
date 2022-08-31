@@ -1,0 +1,67 @@
+2022-08-12 06:45:50,862 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-12 09:09:10,460 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: HTTPConnectionPool(host='88.200.63.216', port=8086): Read timed out. (read timeout=5.999114996000571)
+2022-08-13 08:59:12,107 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 12:00:33,756 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: could not convert string to float: ''
+2022-08-13 12:00:34,374 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 12:00:34,935 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 12:00:35,700 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 12:00:36,972 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 12:00:39,054 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 12:00:42,725 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 12:39:16,523 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: could not convert string to float: ''
+2022-08-13 12:51:13,577 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: (<urllib3.connection.HTTPConnection object at 0x7f16138d5160>, 'Connection to 88.200.63.216 timed out. (connect timeout=6.0)')
+2022-08-13 12:51:26,125 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 13:06:53,116 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: could not convert string to float: ''
+2022-08-13 14:36:19,790 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: could not convert string to float: ''
+2022-08-13 14:36:20,423 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 14:36:20,973 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 14:36:21,763 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 14:36:22,955 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 14:36:25,011 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-13 14:36:28,638 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 11:08:40,791 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 12:51:02,757 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: could not convert string to float: ''
+2022-08-14 12:51:03,393 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 12:51:03,958 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 12:51:04,698 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 12:51:05,887 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 12:51:07,892 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 12:51:11,512 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:52:10,788 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: could not convert string to float: ''
+2022-08-14 13:52:11,370 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:52:11,930 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:52:12,766 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:52:13,978 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:52:15,977 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:52:19,640 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:54:50,932 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: could not convert string to float: ''
+2022-08-14 13:54:56,574 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:55:02,816 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:55:09,194 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:55:15,716 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:55:22,538 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:55:30,275 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:55:42,723 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:56:01,540 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:56:32,613 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:57:28,963 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:58:33,067 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 13:59:37,559 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 14:00:42,068 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 14:01:46,585 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 14:02:51,064 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 14:03:55,631 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 14:05:00,207 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 14:06:04,637 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 14:07:09,160 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 14:36:34,665 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-14 22:18:40,737 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-15 06:48:54,687 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-16 20:19:50,827 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-16 21:19:34,783 — ERROR — main.py:87 —      main_event_loop() — Error during central-INFLUX db insertion: could not convert string to float: ''
+2022-08-16 21:19:35,410 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-16 21:19:36,041 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-16 21:19:36,829 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-16 21:19:38,082 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-16 21:19:40,092 — ERROR — main.py:36 —             __init__() — network latency restarted
+2022-08-16 21:19:43,674 — ERROR — main.py:36 —             __init__() — network latency restarted

@@ -35,8 +35,8 @@ sudo apt-get -y install telegraf
 sudo apt-get -y install ufw
 # open ports, optional
 sudo ufw allow 22 
-#allow port to access local DB
-sudo ufw allow 3306
+#Do not port to access local DB (security is not ready)
+#sudo ufw allow 3306 
 sudo ufw enable
 
 

@@ -23,11 +23,8 @@ services:
         container_name: database
         restart: always
         #user: root #not good, to start container as root
-        environment:
-            MARIADB_ROOT_PASSWORD: eee43trele21
-            MARIADB_DATABASE: local-aq
-            MARIADB_USER: innorenew
-            MARIADB_PASSWORD: 22extrasecret45
+        env_file:
+            - ./../../configuration/.env
         volumes:
             - ./database/my.cnf:/etc/mysql/my.cnf
             - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql

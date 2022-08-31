@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  network-latency:
+    build: .
+    container_name: avahi
+    restart: no
+    network_mode: "host"
+    volumes:
+      - ./..:/arrs_or/latency_monitor/
+      - ./../../configuration/configuration.ini:/arrs_or/latency_monitor/configuration.ini

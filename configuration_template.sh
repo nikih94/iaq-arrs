@@ -13,6 +13,7 @@
 ####
 #
 #   GENERAL CONFIG
+#	Usually this config may vary between sensors
 #
 ####
 
@@ -20,6 +21,10 @@
 SENSOR_HOSTNAME=my-name
 #Each sensors share the same username
 USER_ON_RASPI=pi
+#port on the server that must be configured to allow SSH tcp forwarding
+SERVER_PORT=
+#Identifier of the building in which the sensor will be placed
+BUILDING=my-home
 
 
 
@@ -48,13 +53,12 @@ INFLUX_TIMEOUT=20000
 INFLUX_LOG_BUCKET=rpi_stats
 #Same as the SENSOR_HOSTNAME
 SENSOR_ID=${SENSOR_HOSTNAME}
-#Identifier of the building in which the sensor will be placed
-BUILDING=my-home
-#Local DB setup, no need to change
+#Local DB setup
 LOCAL_DB_HOST=host.docker.internal
 LOCAL_DB_DATABASE=local-aq
-LOCAL_DB_USERNAME=innorenew
-LOCAL_DB_PASS=22extrasecret45
+LOCAL_DB_USERNAME=
+LOCAL_DB_PASS=
+LOCAL_DB_ROOT_PASSWORD=
 
 
 ####
@@ -63,8 +67,7 @@ LOCAL_DB_PASS=22extrasecret45
 #
 ####
 
-#port on the server that must be configured to allow SSH tcp forwarding
-SERVER_PORT=
+
 #ssh port on raspi, default 22
 RASPI_PORT=
 #user on the server, that will be used to create the SSH tunnel
