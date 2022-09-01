@@ -37,7 +37,7 @@ class LocalDB:
 
     def init_local_db(self):
         self.local_connection = mysql.connector.connect(
-            host=self.db_host,
+            host='localhost',  # self.db_host,
             user=self.db_username,
             password=self.db_password,
             database=self.db,
