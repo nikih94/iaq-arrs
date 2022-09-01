@@ -6,9 +6,9 @@ services:
             - '/dev/serial0:/dev/serial0'
         build: data-collection/.
         restart: always
-        extra_hosts:
-            #the container can reference the host machine with host.docker.internal
-            - 'host.docker.internal:host-gateway'
+        #extra_hosts:
+        #the container can reference the host machine with host.docker.internal
+        #    - 'host.docker.internal:host-gateway'
         depends_on:
             #prevents container to start before other container, on which it depends
             - database
