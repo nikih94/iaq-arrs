@@ -16,6 +16,8 @@ then
 fi
 echo "Pulling new version from github"
 
+pwd
+
 runuser -l  pi -c -c "/usr/bin/git pull"
 
 
