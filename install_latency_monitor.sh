@@ -21,7 +21,6 @@ After=network-online.target
 [Service]
 Type=oneshot
 WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/
-ExecStartPre=/bin/bash -c "./try_update.sh"
 ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/setup.sh" 
 ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/enable.sh" 
 ExecStart=/bin/bash -c "./latency_monitor/setup_scripts/setup.sh" 
