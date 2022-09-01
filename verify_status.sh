@@ -14,7 +14,8 @@ then
     echo "System already configured."
     exit 0
 fi
-echo "Pulling new version from github"
+echo "The system was reconfigured, now rebooting"
 
-git pull 
+touch ./status/configured.tmp
 
+sudo reboot
