@@ -37,10 +37,6 @@ sudo apt-get -y install telegraf
 
 
 
-#allow execution of configuration scripts
-sudo chmod 700 setup.sh enable_iaq_monitoring.sh
-
-
 #create the configuration dir if not exist
 mkdir -p configuration
 
