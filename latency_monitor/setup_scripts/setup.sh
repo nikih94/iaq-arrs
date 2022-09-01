@@ -67,8 +67,6 @@ WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/latency_monitor/docker/
 ExecStartPre=docker-compose -f docker-compose.yml build
 # Start container when unit is started
 ExecStart=docker-compose -f docker-compose.yml up
-# Shutdown container (if running) when unit is started
-ExecStartPost=docker-compose -f docker-compose.yml down
 # Stop container when unit is stopped
 ExecStop=docker-compose -f docker-compose.yml down
 
