@@ -99,7 +99,7 @@ Start
 
 if __name__ == "__main__":
     CD = CollectData()
-    print("Starting script")
+    print("Starting script for collecting data")
     s = sched.scheduler(time.time, time.sleep)
     s.enter(CD.delta, 1, CD.main_event_loop, (s,))  # 1 is priority
     s.run()
