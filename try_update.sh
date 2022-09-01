@@ -15,7 +15,7 @@ if git pull 2>/dev/null | grep -q "Already up to date."
 then 
    echo "Already up to date."
 else
-   echo "Updated, now rebooting";
+   echo "Updated, now rebooting it worked";
    sudo reboot
 fi
 

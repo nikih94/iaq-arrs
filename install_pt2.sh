@@ -67,6 +67,7 @@ Description=gitpull
 After=network-online.target
 
 [Service]
+Type=oneshot
 User=pi
 WorkingDirectory=/home/pi/iaq-arrs
 ExecStart=/bin/bash -c "./try_update.sh"
