@@ -35,7 +35,7 @@ services:
             #-  /opt/mysql_data:/var/lib/mysql #persistent storage on local machine
             - mariadb-data:/var/lib/mysql
         ports:
-            - '127.0.0.1:3306:3306'
+            - '3306:3306'
 
 networks:
     mynet:
