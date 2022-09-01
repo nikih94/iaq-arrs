@@ -59,6 +59,8 @@ ExecStop=/bin/bash -c "./verify_status.sh"
 WantedBy=multi-user.target
 EOF
 
+
+
 #move the servis to the correct DIR
 cp ./configuration/setup_iaq_monitoring.service /etc/systemd/system/setup_iaq_monitoring.service
 
