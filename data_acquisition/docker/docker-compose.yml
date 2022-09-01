@@ -34,8 +34,6 @@ services:
             - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
             #-  /opt/mysql_data:/var/lib/mysql #persistent storage on local machine
             - mariadb-data:/var/lib/mysql
-        expose:
-            - '3306'
         ports:
             - '127.0.0.1:3306:3306'
 
