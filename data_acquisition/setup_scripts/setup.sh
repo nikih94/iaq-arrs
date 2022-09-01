@@ -91,7 +91,7 @@ After=network-online.target
 User=${USER_ON_RASPI}
 Restart=always
 Group=docker
-RestartSec=300
+RestartSec=30
 WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/data_acquisition/docker/
 # Shutdown container (if running) when unit is started
 ExecStartPre=/usr/local/bin/docker-compose -f docker-compose.yml down

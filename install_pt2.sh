@@ -13,7 +13,7 @@ if [[ $UID != 0 ]]; then
 fi
 
 #update apt
-sudo apt update
+sudo apt-get update
 
 #set docker non sudo account
 sudo usermod -aG docker ${USER_ON_RASPI}
@@ -33,7 +33,7 @@ sudo pip3 install docker-compose
 wget -qO- https://repos.influxdata.com/influxdb.key | sudo tee /etc/apt/trusted.gpg.d/influxdb.asc >/dev/null
 source /etc/os-release
 echo "deb https://repos.influxdata.com/${ID} ${VERSION_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
-sudo apt update
+sudo apt-get update
 sudo apt-get -y install telegraf
 
 
