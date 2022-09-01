@@ -12,7 +12,7 @@ fi
 
 #check if the configuration is already updated
 
-if [[ -f "./status/configured.tmp" ]]
+if [[ -f "../status/configured.tmp" ]]
 then
     echo "System already configured."
     exit 0
