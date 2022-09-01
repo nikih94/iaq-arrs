@@ -37,7 +37,7 @@ IoT indoor air quality monitoring platform
 
 ## Acknowledgments
 
-We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej Vičič[1], and prof. dr. Mihael Mrissa[1,2] for the theoretical fundations, which are the basis for this implementation.
+We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej Vičič[1], and prof. dr. Michael Mrissa[1,2] for the theoretical fundations, which are the basis for this implementation.
 <br/>
 <br/>
 [1] University of Primorska Faculty of Mathematics, Natural Sciences and Information Technologies
