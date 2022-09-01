@@ -16,6 +16,6 @@ then
 fi
 echo "Pulling new version from github"
 
-git pull 
+sudo -H -u pi bash -c "git pull"
 
 
