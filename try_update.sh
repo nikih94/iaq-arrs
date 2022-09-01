@@ -15,6 +15,6 @@ if git pull 2>/dev/null | grep -q "Already up to date."
 then 
    echo "NOT updated";
 else
-   echo "Updated yeah";
+   echo "Updated yeah uuu";
 fi
 
