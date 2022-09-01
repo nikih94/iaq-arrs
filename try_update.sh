@@ -6,15 +6,16 @@
 if [[ -f "../status/configured.tmp" ]]
 then
     echo "System already configured."
-    #exit 0
+    exit 0
 fi
 echo "Pulling new version from github"
 
 
 if git pull 2>/dev/null | grep -q "Already up to date."
 then 
-   echo "NOT updated";
+   echo "Already up to date."
 else
-   echo "Updated yeah uuu ooo";
+   echo "Updated, now rebooting";
+   sudo reboot
 fi
 
