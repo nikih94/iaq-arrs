@@ -211,6 +211,14 @@ Use the `passwd` command to set a new password
 ##### Installation scripts
 
 Run the two installation scripts respectively *install_pt1.sh* and *install_pt2.sh* the system will reboot between scripts.
+<br>
+If *install_pt1.sh* does not work due to **apt update** not working, run the following commands:
+```
+sudo rm -r /var/lib/apt/lists/*
+sudo apt update
+```
+Then re-run *install_pt1.sh*.
+
 
 ##### DD command to replicate the system to all sensors
 
