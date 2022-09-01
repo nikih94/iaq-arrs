@@ -12,6 +12,8 @@ services:
         depends_on:
             #prevents container to start before other container, on which it depends
             - database
+        links:
+            - database
         command: sh -c "cd ./iaq-arrs/data_acquisition/ && python collect_data.py"
         volumes:
             #- ./data-collection/log:/arrs_or/data_acquisition/client/log
