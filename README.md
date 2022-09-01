@@ -164,16 +164,37 @@ cat raspi_public_key >>  /home/raspi/.ssh/authorized_keys
 
 Log into the raspi and perform the following
 
-##### Install git and download the application
-
-```
-sudo apt-get install git
-git clone https://github.com/nikih94/iaq-arrs/
-```
 
 ##### SSH keys
 
 Move the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) into `ssh_keys`
+<br>
+Perform the following commands:
+
+```
+#create the dir for ssh keys
+mkdir -p /home/pi/.ssh
+#copy keys
+sudo cat ssh_keys/id_rsa.pub > /home/pi/.ssh/id_rsa.pub
+sudo cat ssh_keys/id_rsa > /home/pi/.ssh/id_rsa
+#set permissions to keys
+cd .ssh/
+touch known_hosts
+sudo chmod 400 id_rsa
+sudo chmod 400 id_rsa.pub
+sudo chmod 600 known_hosts
+cd ..
+
+```
+
+
+##### Install git and download the application
+
+```
+sudo apt-get install git
+git clone git@github.com:nikih94/iaq-arrs.git
+```
+
 
 ##### Configuration file
 
