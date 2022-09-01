@@ -192,7 +192,7 @@ cd ..
 
 ```
 sudo apt-get install git
-https://github.com/nikih94/iaq-arrs/settings
+git clone https://github.com/nikih94/iaq-arrs
 ```
 
 
