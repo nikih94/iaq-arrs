@@ -18,6 +18,6 @@ echo "Pulling new version from github"
 
 pwd
 
-runuser -l  pi -c "cd /home/${USER_ON_RASPI}/iaq-arrs/ && /usr/bin/git pull"
+runuser -l  pi -c "cd /home/pi/iaq-arrs/ && /usr/bin/git pull"
 
 
