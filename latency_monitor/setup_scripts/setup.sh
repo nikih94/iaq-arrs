@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-. ./iaq-arrs/configuration.sh
+. ./configuration.sh
 
 
 # Notify that the script must be run with sudo 
@@ -21,9 +21,6 @@ fi
 echo "Start system configuration"
 
 
-cd ./iaq-arrs
-
-
 
 ####
 #
@@ -39,7 +36,7 @@ cat >> ./configuration/configuration.ini <<EOF
 
 
 [network_latency]
-measurement_delta=60
+measurement_delta=10
 central_server_ip=${SERVER_IP}
 latency_test_timeout=10
 latency_bucket=network_latency

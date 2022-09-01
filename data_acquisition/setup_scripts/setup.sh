@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-. ./iaq-arrs/configuration.sh
+. ./configuration.sh
 
 
 # Notify that the script must be run with sudo 
@@ -19,10 +19,6 @@ then
     exit 0
 fi
 echo "Start system configuration"
-
-
-cd ./iaq-arrs
-
 
 
 

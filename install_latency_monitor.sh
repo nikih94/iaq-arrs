@@ -20,11 +20,12 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=/home/${USER_ON_RASPI}
-ExecStart=/bin/bash -c "./iaq-arrs/setup.sh" 
-ExecStart=/bin/bash -c "./iaq-arrs/enable_iaq_monitoring.sh" 
-ExecStart=/bin/bash -c "./iaq-arrs/setup_latency_monitor.sh" 
-ExecStop=/bin/bash -c "./iaq-arrs/verify_status.sh"
+WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/
+ExecStartPre=/bin/bash -c "./try_update.sh"
+ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/setup.sh" 
+ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/enable.sh" 
+ExecStart=/bin/bash -c "./latency_monitor/setup_scripts/setup.sh" 
+ExecStop=/bin/bash -c "./verify_status.sh"
 
 [Install]
 WantedBy=multi-user.target
