@@ -40,7 +40,8 @@ class LocalDB:
             host=self.db_host,
             user=self.db_username,
             password=self.db_password,
-            database=self.db)
+            database=self.db,
+            port=3306)
 
     """
     MAINTAIN PERSISTENT CONNECTION ping and try to reconnect
