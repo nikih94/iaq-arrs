@@ -60,24 +60,6 @@ WantedBy=multi-user.target
 EOF
 
 
-#Setup unit file that will run sripts setup.sh and enable_iaq_monitoring.sh 
-cat > configuration/gitpull.service <<EOF
-[Unit]
-Description=gitpull
-After=network-online.target
-
-[Service]
-Type=oneshot
-User=pi
-WorkingDirectory=/home/pi/iaq-arrs
-ExecStart=/bin/bash -c "./try_update.sh"
-
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-
 
 #move the servis to the correct DIR
 cp ./configuration/setup_iaq_monitoring.service /etc/systemd/system/setup_iaq_monitoring.service
@@ -87,6 +69,7 @@ mkdir -p /home/${USER_ON_RASPI}/status
 
 #enable the service
 sudo systemctl enable setup_iaq_monitoring.service
+
 
 #stop the service
 sudo systemctl stop setup_iaq_monitoring.service
