@@ -170,7 +170,9 @@ Log into the raspi and perform the following
 Move the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) into `ssh_keys`
 <br>
 Perform the following commands:
-
+  
+  
+  
 ```
 #create the dir for ssh keys
 mkdir -p /home/pi/.ssh
