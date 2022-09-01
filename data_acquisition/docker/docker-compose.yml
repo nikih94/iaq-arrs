@@ -6,9 +6,6 @@ services:
             - '/dev/serial0:/dev/serial0'
         build: data-collection/.
         restart: always
-        extra_hosts:
-            #the container can reference the host machine with host.docker.internal
-            - 'host.docker.internal:host-gateway'
         depends_on:
             #prevents container to start before other container, on which it depends
             - database
@@ -35,7 +32,7 @@ services:
             #-  /opt/mysql_data:/var/lib/mysql #persistent storage on local machine
             - mariadb-data:/var/lib/mysql
         ports:
-            - '127.0.0.1:3306:3306'
+            - '127.0.0.1:3306:3306' #expose only to localhost
 
 networks:
     mynet:
