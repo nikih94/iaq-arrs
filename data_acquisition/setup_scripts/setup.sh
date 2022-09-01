@@ -91,14 +91,16 @@ After=network-online.target
 User=${USER_ON_RASPI}
 Restart=always
 Group=docker
-RestartSec="5min 20s"
+RestartSec=300
 WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/data_acquisition/docker/
 # Shutdown container (if running) when unit is started
-ExecStartPre=docker-compose -f docker-compose.yml down
+ExecStartPre=/usr/local/bin/docker-compose -f docker-compose.yml down
 # Start container when unit is started
-ExecStart=docker-compose -f docker-compose.yml up
+ExecStart=/usr/local/bin/docker-compose -f docker-compose.yml up
 # Stop container when unit is stopped
-ExecStop=docker-compose -f docker-compose.yml down
+ExecStartPost=/usr/local/bin/docker-compose -f docker-compose.yml down
+# Rebuild container when unit is stopped
+ExecStop=/usr/local/bin/docker-compose -f docker-compose.yml build
 
 [Install]
 WantedBy=multi-user.target
