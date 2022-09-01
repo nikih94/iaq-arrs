@@ -32,10 +32,6 @@ services:
             - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
             #-  /opt/mysql_data:/var/lib/mysql #persistent storage on local machine
             - mariadb-data:/var/lib/mysql
-        ports:
-            - '127.0.0.1:3306:3306'
-            - '0.0.0.0:3306:3306'
-            - 'host.docker.internal:3306:3306'
 volumes:
     mariadb-data:
         external: true
