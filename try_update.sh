@@ -10,8 +10,11 @@ then
 fi
 echo "Pulling new version from github"
 
-pwd
 
-git pull
-
+if git pull 2>/dev/null | grep -q "Already up to date."
+then 
+   echo "Updated";
+else
+   echo "NOT updated";
+fi
 
