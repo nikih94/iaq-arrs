@@ -16,6 +16,6 @@ then
 fi
 echo "Pulling new version from github"
 
-sudo -H -u pi bash -c "git pull"
+runuser -l  pi -c -c "/usr/bin/git pull"
 
 
