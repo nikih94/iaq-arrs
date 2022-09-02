@@ -223,7 +223,7 @@ cat > configuration/telegraf.conf <<EOF
   ## Multiple URLs can be specified for a single cluster, only ONE of the
   ## urls will be written to each interval.
   ##   ex: urls = ["https://us-west-2-1.aws.cloud2.influxdata.com"]
-  urls = ["http://${SERVER_IP}:8086"]
+  urls = ["${INFLUX_URL}]
 
   ## Token for authentication.
   token = "$TELEGRAF_TOKEN_PLACEHOLDER"

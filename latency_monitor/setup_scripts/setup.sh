@@ -61,7 +61,7 @@ After=setup_iaq_monitoring.service
 User=${USER_ON_RASPI}
 Restart=always
 Group=docker
-RestartSec=300
+RestartSec=30
 WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/latency_monitor/docker/
 # Shutdown container (if running) when unit is started
 ExecStartPre=/usr/local/bin/docker-compose -f docker-compose.yml down
