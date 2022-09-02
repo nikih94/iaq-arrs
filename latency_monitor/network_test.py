@@ -34,7 +34,6 @@ class NetworkTest:
         self.devices.append(self.server)
         result = []
         for dev in self.devices:
-            result = None
             try:
                 proc = subprocess.Popen(
                     ['netperf -H '+dev[0]+'  -l -10000 -TCP_RR  -b 1 -v 2 -- -O mean_latency'], stdout=subprocess.PIPE, shell=True)
