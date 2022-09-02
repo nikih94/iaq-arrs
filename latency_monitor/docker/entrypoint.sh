@@ -41,7 +41,8 @@ else
     avahi-daemon --no-chroot --daemonize
     cd /arrs_or/latency_monitor/
     echo "Start main program"
-    python3 main.py
+    python3 hello.py
+    #python3 main.py
     echo "Program died"
 fi
 

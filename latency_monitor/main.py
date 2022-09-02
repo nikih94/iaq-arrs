@@ -66,7 +66,7 @@ class LatencyMonitor:
 
     def main_event_loop(self, sc):
         print("Read data...")
-        s.enter(3, 1, self.main_event_loop, (sc,))
+        s.enter(self.delta, 1, self.main_event_loop, (sc,))
         # # do your stuff
         # try:
         #     print('Load devices')
@@ -98,5 +98,5 @@ if __name__ == "__main__":
     LM = LatencyMonitor()
     print("Starting script")
     s = sched.scheduler(time.time, time.sleep)
-    s.enter(3, 1, LM.main_event_loop, (s,))  # 1 is priority
+    s.enter(LM.delta, 1, LM.main_event_loop, (s,))  # 1 is priority
     s.run()
