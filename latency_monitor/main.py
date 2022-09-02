@@ -67,13 +67,13 @@ class LatencyMonitor:
     def main_event_loop(self, sc):
         print("Read data...")
         s.enter(self.delta, 1, self.main_event_loop, (sc,))
-        # # do your stuff
-        # try:
-        #     print('Load devices')
-        #     self.nt.load_devices()
-        # except Exception as e:
-        #     self.logger.error(str(e))
-        #     return
+        # do your stuff
+        try:
+            print('Load devices')
+            self.nt.load_devices()
+        except Exception as e:
+            self.logger.error(str(e))
+            return
         # try:
         #     print('Measure')
         #     latency_data = self.nt.measure_latency()
