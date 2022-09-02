@@ -91,7 +91,7 @@ After=network-online.target
 User=${USER_ON_RASPI}
 Restart=always
 Group=docker
-RestartSec=30
+RestartSec=180
 WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/data_acquisition/docker/
 # Shutdown container (if running) when unit is started
 ExecStartPre=/usr/local/bin/docker-compose -f docker-compose.yml down
@@ -121,10 +121,10 @@ After=network-online.target
 
 [Service]
 User=${USER_ON_RASPI}
-ExecStart=/usr/bin/ssh -NT -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -R ${SERVER_PORT}:localhost:${RASPI_PORT} ${SENSOR_USER}@${IR_SERVER}
+ExecStart=/usr/bin/ssh -NT -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -R ${SERVER_PORT}:localhost:${RASPI_PORT} -p ${IR_SSH_PORT} ${SENSOR_USER}@${IR_SERVER}
 
 # Restart every >2 seconds to avoid StartLimitInterval failure
-RestartSec=5
+RestartSec=10
 Restart=always
 
 [Install]

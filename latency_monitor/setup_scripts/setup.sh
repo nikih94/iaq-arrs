@@ -36,7 +36,7 @@ cat >> ./configuration/configuration.ini <<EOF
 
 
 [network_latency]
-measurement_delta=10
+measurement_delta=${LATENCY_DELTA}
 central_server_ip=${NETPERF_IP}
 latency_test_timeout=10
 latency_bucket=network_latency
@@ -61,7 +61,7 @@ After=setup_iaq_monitoring.service
 User=${USER_ON_RASPI}
 Restart=always
 Group=docker
-RestartSec=30
+RestartSec=180
 WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/latency_monitor/docker/
 # Shutdown container (if running) when unit is started
 ExecStartPre=/usr/local/bin/docker-compose -f docker-compose.yml down

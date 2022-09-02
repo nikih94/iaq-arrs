@@ -74,6 +74,8 @@ RASPI_PORT=
 SENSOR_USER=
 #IR server address
 IR_SERVER=
+#IR server ssh port
+IR_SSH_PORT=
 
 
 
@@ -112,3 +114,5 @@ SSH_PRIVATE=./ssh_keys/id_rsa
 
 #Network latency server
 NETPERF_IP=0.0.0.0
+#delta in seconds between measurments of latency
+LATENCY_DELTA=10

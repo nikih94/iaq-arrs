@@ -38,6 +38,12 @@ sudo ufw enable
 #set correct timezone
 timedatectl set-timezone Europe/Rome
 
+cd ~
+
+#Set ssh keys
+mkdir -p .ssh && sudo cat ssh_keys/id_rsa.pub > .ssh/id_rsa.pub && sudo cat ssh_keys/id_rsa > .ssh/id_rsa && cd .ssh/ && touch known_hosts && sudo chmod 400 id_rsa && sudo chmod 400 id_rsa.pub && sudo chmod 600 known_hosts && cd ..
+
+
 #reboot 
 sudo reboot
 
