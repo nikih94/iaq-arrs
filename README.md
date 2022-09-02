@@ -218,6 +218,7 @@ Do next steps:
 * Use the **dd** command to create a new image
 
 ```
+sudo umount /dev/mmcblk0 
 sudo dd if=/dev/mmcblk0 of=/home/niki/Desktop/ARRS/production_images/test.img
 ```
 
@@ -235,6 +236,7 @@ sudo pishrink.sh /home/niki/Desktop/ARRS/production_images/test.img
 Insert empty SD in laptop. Run the command to copy the image to the sd:
 
 ```
+sudo umount /dev/mmcblk0 
 sudo dd if=/home/niki/Desktop/ARRS/production_images/test.img of=/dev/mmcblk0
 ```
 *Requires 5mins*
