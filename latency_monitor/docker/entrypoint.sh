@@ -3,7 +3,7 @@
 echo "starting"
 
 #Start netserver
-#netserver -4
+/usr/local/bin/netserver -4
 
 echo "host mac address"
 cat /sys/class/net/wlan0/address
