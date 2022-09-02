@@ -80,13 +80,13 @@ class LatencyMonitor:
         except Exception as e:
             self.logger.error(str(e))
             return
-        # try:
-        #     if latency_data != None:
-        #         print('store')
-        #         self.central_database.save_latency_to_db(latency_data)
-        # except Exception as e:
-        #     self.logger.error(
-        #         "Error during central-INFLUX db insertion: " + str(e))
+        try:
+            if latency_data != None:
+                print('store')
+                self.central_database.save_latency_to_db(latency_data)
+        except Exception as e:
+            self.logger.error(
+                "Error during central-INFLUX db insertion: " + str(e))
 
 
 """
