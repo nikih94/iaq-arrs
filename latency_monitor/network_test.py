@@ -72,6 +72,6 @@ class NetworkTest:
 
 if __name__ == "__main__":
     print('Started')
-    NT = NetworkTest('88.200.63.216')
+    NT = NetworkTest('iaq.innorenew.eu', 10)
     NT.load_devices()
     NT.measure_latency()
