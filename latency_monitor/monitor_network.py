@@ -26,7 +26,7 @@ class NetworkTest:
         for dev in self.devices:
             try:
                 proc = subprocess.Popen(
-                    ['netperf  -p 12865 ,12865 -H '+dev[0]+'  -l 3 -TCP_RR  -b 1 -v 2 -- -O mean_latency -P 12866'], stdout=subprocess.PIPE, shell=True)
+                    ['netperf  -H '+dev[0]+'  -l 3 -TCP_RR  -b 1 -v 2 -- -O mean_latency -P 12866'], stdout=subprocess.PIPE, shell=True)
                 outs, errs = proc.communicate(timeout=10)
                 lines = outs.splitlines()
                 if len(lines) == 7:
