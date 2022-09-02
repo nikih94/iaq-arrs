@@ -58,3 +58,4 @@ sudo ufw allow 50188
 
 #open port for netserver
 sudo ufw allow 12865
+sudo ufw allow 12866
