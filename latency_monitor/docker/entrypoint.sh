@@ -40,7 +40,9 @@ else
     dbus-daemon --system
     avahi-daemon --no-chroot --daemonize
     cd /arrs_or/latency_monitor/
+    echo "Start main program"
     python3 main.py
+    echo " Program died"
 fi
 
 
