@@ -56,6 +56,7 @@ class LatencyMonitor:
         # configure network test
         self.nt = network_test.NetworkTest(
             config['network_latency'].get('central_server_ip'), config['network_latency'].getint('latency_test_timeout'), self.logger)
+        print("Configured")
 
     """
 
@@ -93,6 +94,7 @@ Start
 """
 
 if __name__ == "__main__":
+    print("Main started")
     LM = LatencyMonitor()
     print("Starting script")
     s = sched.scheduler(time.time, time.sleep)
