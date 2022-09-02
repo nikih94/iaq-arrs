@@ -26,7 +26,7 @@ RUN cd netperf-${NETPERF_VERSION} && CFLAGS="-fcommon" ./configure --build=aarch
 RUN pip3 install 'influxdb-client[ciso]' && pip3 install pyrsistent && pip install rx
 
 #start netserver
-RUN netserver -4
+RUN /usr/local/bin/netserver -4
 
 #CMD ["/bin/sh"]
 
