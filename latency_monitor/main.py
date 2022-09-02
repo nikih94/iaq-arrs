@@ -74,12 +74,12 @@ class LatencyMonitor:
         except Exception as e:
             self.logger.error(str(e))
             return
-        # try:
-        #     print('Measure')
-        #     latency_data = self.nt.measure_latency()
-        # except Exception as e:
-        #     self.logger.error(str(e))
-        #     return
+        try:
+            print('Measure')
+            latency_data = self.nt.measure_latency()
+        except Exception as e:
+            self.logger.error(str(e))
+            return
         # try:
         #     if latency_data != None:
         #         print('store')
