@@ -95,8 +95,8 @@ Start
 
 if __name__ == "__main__":
     print("Main started")
-    LM = LatencyMonitor()
+    #LM = LatencyMonitor()
     print("Starting script")
-    s = sched.scheduler(time.time, time.sleep)
-    s.enter(LM.delta, 1, LM.main_event_loop, (s,))  # 1 is priority
-    s.run()
+    #s = sched.scheduler(time.time, time.sleep)
+    # s.enter(LM.delta, 1, LM.main_event_loop, (s,))  # 1 is priority
+    # s.run()
