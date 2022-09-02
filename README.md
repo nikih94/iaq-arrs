@@ -93,7 +93,7 @@ Paste the following at the end of the config:
 ```
 Match User raspi
         AllowTcpForwarding yes
-                PermitOpen localhost:22222 localhost:22223
+                PermitOpen localhost:22200 localhost:22201 localhost:22202 localhost:22203 localhost:22204  localhost:22205 localhost:22206 localhost:22207 localhost:22208 localhost:22209 localhost:22210 localhost:22211 localhost:22212 localhost:22213 localhost:22214 localhost:22215 localhost:22216 localhost:22217 localhost:22218 localhost:22219 localhost:22220 localhost:22221 localhost:22222 localhost:22223 localhost:22224 localhost:22225 localhost:22226 localhost:22227 localhost:22228 localhost:22229 localhost:22230 localhost:22231 localhost:22232 localhost:22234 localhost:22235 localhost:22236 localhost:22237 localhost:22238 localhost:22239 localhost:22240
         X11Forwarding no
         PermitTunnel no
         GatewayPorts no
@@ -150,7 +150,7 @@ Store the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) for late
 Follow the following [guide](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server) to copy the ssh public key to the authorized_keys directory on the server.
 <br>
 
-remember that you must create the .ssh directory on the server. The following commands may be useful:
+You must create the .ssh directory on the server. You must set ownership of .ssh and its files to the raspi user. The following commands may be useful:
 
 
 ```
