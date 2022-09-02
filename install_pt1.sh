@@ -35,6 +35,8 @@ sudo ufw allow 22
 #sudo ufw allow 3306 
 sudo ufw enable
 
+#set correct timezone
+timedatectl set-timezone Europe/Rome
 
 #reboot 
 sudo reboot

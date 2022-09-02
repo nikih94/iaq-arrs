@@ -72,8 +72,8 @@ LOCAL_DB_ROOT_PASSWORD=
 RASPI_PORT=
 #user on the server, that will be used to create the SSH tunnel
 SENSOR_USER=
-#Server ip
-SERVER_IP=
+#IR server address
+IR_SERVER=
 
 
 
@@ -101,3 +101,14 @@ TELEGRAF_TOKEN=
 #No need to change, just point at where SSH_KEYS are located
 SSH_PUBLIC=./ssh_keys/id_rsa.pub
 SSH_PRIVATE=./ssh_keys/id_rsa
+
+
+####
+#
+#   NETWORK LATENCY
+#
+####
+
+
+#Network latency server
+NETPERF_IP=0.0.0.0
