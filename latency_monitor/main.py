@@ -67,26 +67,26 @@ class LatencyMonitor:
     def main_event_loop(self, sc):
         print("Read data...")
         s.enter(self.delta, 1, self.main_event_loop, (sc,))
-        # do your stuff
-        try:
-            print('Load devices')
-            self.nt.load_devices()
-        except Exception as e:
-            self.logger.error(str(e))
-            return
-        try:
-            print('Measure')
-            latency_data = self.nt.measure_latency()
-        except Exception as e:
-            self.logger.error(str(e))
-            return
-        try:
-            if latency_data != None:
-                print('store')
-                self.central_database.save_latency_to_db(latency_data)
-        except Exception as e:
-            self.logger.error(
-                "Error during central-INFLUX db insertion: " + str(e))
+        # # do your stuff
+        # try:
+        #     print('Load devices')
+        #     self.nt.load_devices()
+        # except Exception as e:
+        #     self.logger.error(str(e))
+        #     return
+        # try:
+        #     print('Measure')
+        #     latency_data = self.nt.measure_latency()
+        # except Exception as e:
+        #     self.logger.error(str(e))
+        #     return
+        # try:
+        #     if latency_data != None:
+        #         print('store')
+        #         self.central_database.save_latency_to_db(latency_data)
+        # except Exception as e:
+        #     self.logger.error(
+        #         "Error during central-INFLUX db insertion: " + str(e))
 
 
 """
