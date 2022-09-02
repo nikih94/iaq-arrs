@@ -41,7 +41,7 @@ class NetworkTest:
                 lines = outs.splitlines()
                 if len(lines) == 7:
                     latency = lines[6].rstrip().decode('utf-8')
-                    print('Device: ', dev[0], ' latency in usec: ', latency)
+                    #print('Device: ', dev[0], ' latency in usec: ', latency)
                     result.append([dev[1], dev[2], latency])
             except subprocess.TimeoutExpired as t:
                 self.logger.error("Timeout error when measuring latency to device mac:" + str(
