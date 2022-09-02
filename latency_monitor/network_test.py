@@ -20,9 +20,10 @@ class NetworkTest:
     """
     logger = None
 
-    def __init__(self, server_ip, timeout):
+    def __init__(self, server_ip, timeout, logger):
         self.server = (server_ip, 'no-mac', 'ir-server')
         self.TIMEOUT = timeout
+        self.logger = logger
         pass
 
     """
@@ -78,6 +79,6 @@ class NetworkTest:
 
 if __name__ == "__main__":
     print('Started')
-    NT = NetworkTest('88.200.63.216', 10)
+    NT = NetworkTest('88.200.63.216', 10, None)
     NT.load_devices()
     NT.measure_latency()

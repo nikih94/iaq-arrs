@@ -55,7 +55,7 @@ class LatencyMonitor:
         self.logger = log_errors.get_logger("error_logger")
         # configure network test
         self.nt = network_test.NetworkTest(
-            config['network_latency'].get('central_server_ip'), config['network_latency'].getint('latency_test_timeout'))
+            config['network_latency'].get('central_server_ip'), config['network_latency'].getint('latency_test_timeout'), self.logger)
 
     """
 
