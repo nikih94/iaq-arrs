@@ -169,23 +169,12 @@ Log into the raspi and perform the following
 
 Move the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) into `ssh_keys`
 <br>
-Perform the following commands:
+Execute the following commands:
   
   
   
 ```
-#create the dir for ssh keys
-mkdir -p /home/pi/.ssh
-#copy keys
-sudo cat ssh_keys/id_rsa.pub > /home/pi/.ssh/id_rsa.pub
-sudo cat ssh_keys/id_rsa > /home/pi/.ssh/id_rsa
-#set permissions to keys
-cd .ssh/
-touch known_hosts
-sudo chmod 400 id_rsa
-sudo chmod 400 id_rsa.pub
-sudo chmod 600 known_hosts
-cd ..
+mkdir -p /home/pi/.ssh && sudo cat ssh_keys/id_rsa.pub > /home/pi/.ssh/id_rsa.pub && sudo cat ssh_keys/id_rsa > /home/pi/.ssh/id_rsa && cd .ssh/ && touch known_hosts && sudo chmod 400 id_rsa && sudo chmod 400 id_rsa.pub && sudo chmod 600 known_hosts && cd ..
 
 ```
 
