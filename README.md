@@ -169,23 +169,12 @@ Log into the raspi and perform the following
 
 Move the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) into `ssh_keys`
 <br>
-Perform the following commands:
+Execute the following commands:
   
   
   
 ```
-#create the dir for ssh keys
-mkdir -p /home/pi/.ssh
-#copy keys
-sudo cat ssh_keys/id_rsa.pub > /home/pi/.ssh/id_rsa.pub
-sudo cat ssh_keys/id_rsa > /home/pi/.ssh/id_rsa
-#set permissions to keys
-cd .ssh/
-touch known_hosts
-sudo chmod 400 id_rsa
-sudo chmod 400 id_rsa.pub
-sudo chmod 600 known_hosts
-cd ..
+mkdir -p /home/pi/.ssh && sudo cat ssh_keys/id_rsa.pub > /home/pi/.ssh/id_rsa.pub && sudo cat ssh_keys/id_rsa > /home/pi/.ssh/id_rsa && cd .ssh/ && touch known_hosts && sudo chmod 400 id_rsa && sudo chmod 400 id_rsa.pub && sudo chmod 600 known_hosts && cd ..
 
 ```
 
@@ -211,6 +200,14 @@ Use the `passwd` command to set a new password
 ##### Installation scripts
 
 Run the two installation scripts respectively *install_pt1.sh* and *install_pt2.sh* the system will reboot between scripts.
+<br>
+If *install_pt1.sh* does not work due to **apt update** not working, run the following commands:
+```
+sudo rm -r /var/lib/apt/lists/*
+sudo apt update
+```
+Then re-run *install_pt1.sh*.
+
 
 ##### DD command to replicate the system to all sensors
 
@@ -221,23 +218,30 @@ Do next steps:
 * Use the **dd** command to create a new image
 
 ```
+sudo umount /dev/mmcblk0 
 sudo dd if=/dev/mmcblk0 of=/home/niki/Desktop/ARRS/production_images/test.img
 ```
 
 *Requires 3.5mins*
+
+<br>
+Shrink image using [PiShrink](https://github.com/Drewsif/PiShrink)
+
+```
+sudo pishrink.sh /home/niki/Desktop/ARRS/production_images/test.img
+```
 
 ##### The following sections must be performed on each raspi
 
 Insert empty SD in laptop. Run the command to copy the image to the sd:
 
 ```
+sudo umount /dev/mmcblk0 
 sudo dd if=/home/niki/Desktop/ARRS/production_images/test.img of=/dev/mmcblk0
 ```
-*Requires 20mins*
+*Requires 5mins*
 
-*If this error occurs:    dd: writing to '/dev/sdc': No space left on device   look at this guides:  [one](https://www.cyberpunk.rs/clone-micro-sd-card) [two](https://linuxhint.com/how-to-clone-a-raspberry-pi-sd-card/#:~:text=Once%20your%20Raspberry%20Pi%20is,would%20take%20approximately%20fifteen%20minutes.)   *
 
-<br>
 <br>
 
 Insert the SD and perform the following:
