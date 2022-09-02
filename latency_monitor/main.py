@@ -33,7 +33,7 @@ class LatencyMonitor:
 
     def __init__(self):
         self.load_configuration()
-        self.logger.error("network latency restarted")
+        #self.logger.error("network latency restarted")
         pass
 
     """
