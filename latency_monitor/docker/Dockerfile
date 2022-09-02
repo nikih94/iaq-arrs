@@ -6,7 +6,7 @@ FROM python:3.8-alpine3.15
 # Avahi is for DNS-SD broadcasting on the local network; DBUS is how Avahi communicates with clients
 RUN apk add make gcc libc-dev g++ linux-headers dbus avahi avahi-dev avahi-compat-libdns_sd avahi-tools
 
-#RUN dbus-daemon --system && avahi-daemon --no-chroot --daemonize
+RUN dbus-daemon --system && avahi-daemon --no-chroot --daemonize
 
 # install netperf
 ENV NETPERF_VERSION=2.7.0
@@ -23,13 +23,12 @@ RUN cd netperf-${NETPERF_VERSION} && CFLAGS="-fcommon" ./configure --build=aarch
     && make && make install
 
 # install influxdb
-RUN pip3 install 'influxdb-client[ciso]' && pip3 install pyrsistent && pip install rx && 
+RUN pip3 install 'influxdb-client[ciso]' && pip3 install pyrsistent && pip install rx 
 
-#start netserver
-#RUN /usr/local/bin/netserver -4
+
 
 #CMD ["/bin/sh"]
 
 ENTRYPOINT ["sh","/arrs_or/latency_monitor/docker/entrypoint.sh"]
 
-#CMD ["python3","/arrs_or/latency_monitor/main.py"]
+#CMD ["python3","-uc","/arrs_or/latency_monitor/hello.py"]

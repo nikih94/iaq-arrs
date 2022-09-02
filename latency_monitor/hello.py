@@ -1,20 +1,14 @@
-#!/usr/bin/env python
-import logging
+#!/usr/bin/env python3
 import sched
 import time
-import struct
-import influx_client
-import configparser
-import log_errors
-import re
-import uuid
-import network_test
 
 
 class LatencyMonitor:
     # time interval between taken measuraments in seconds
     delta = 10
 
+    def __init__(self):
+        pass
     """
 
     Run the Event loop every DELTA seconds

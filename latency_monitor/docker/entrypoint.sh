@@ -1,6 +1,10 @@
 #!/bin/sh -e
-
 echo "starting"
+
+cd /arrs_or/latency_monitor/
+echo "Start main program"
+python3 hello.py
+exit 0
 
 #Start netserver
 /usr/local/bin/netserver -4
@@ -41,8 +45,8 @@ else
     avahi-daemon --no-chroot --daemonize
     cd /arrs_or/latency_monitor/
     echo "Start main program"
-    python3 hello.py
-    #python3 main.py
+    #python3 hello.py
+    python3 main.py
     echo "Program died"
 fi
 
