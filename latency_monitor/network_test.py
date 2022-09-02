@@ -44,6 +44,9 @@ class NetworkTest:
             except subprocess.TimeoutExpired as t:
                 self.logger.error("Timeout error when measuring latency to device mac:" + str(
                     dev[1]) + " hostname:" + str(dev[2]) + " watchdog: " + str(self.TIMEOUT))
+            except Exception as e:
+                self.logger.error(
+                    "Error during latency measurement " + str(e))
         return result
 
     """
@@ -68,10 +71,13 @@ class NetworkTest:
         except subprocess.TimeoutExpired as t:
             self.logger.error(
                 "Timeout error when reading avahi device list, watchdog: " + str(self.TIMEOUT))
+        except Exception as e:
+            self.logger.error(
+                "Error during device discovery " + str(e))
 
 
 if __name__ == "__main__":
     print('Started')
-    NT = NetworkTest('iaq.innorenew.eu', 10)
+    NT = NetworkTest('88.200.63.216', 10)
     NT.load_devices()
     NT.measure_latency()

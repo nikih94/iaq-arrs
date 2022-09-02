@@ -29,7 +29,8 @@ class NetworkTest:
                     ['netperf -H '+dev[0]+'  -l -10000 -TCP_RR  -b 1 -v 2 -- -O mean_latency'], stdout=subprocess.PIPE, shell=True)
                 outs, errs = proc.communicate(timeout=10)
                 lines = outs.splitlines()
-                latency = lines[6].rstrip().decode('utf-8')
+                print(lines)
+                #latency = lines[6].rstrip().decode('utf-8')
                 #print('Device: ', dev[0], ' latency in usec: ', latency)
             except subprocess.TimeoutExpired as t:
                 print('Timed out')
