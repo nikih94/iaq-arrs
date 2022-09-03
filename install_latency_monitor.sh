@@ -47,15 +47,3 @@ sudo systemctl stop setup_iaq_monitoring.service
 sudo rm /home/${USER_ON_RASPI}/status/configured.tmp
 
 
-#open port for avahi
-sudo ufw allow 59551  
-sudo ufw allow 5353
-sudo ufw allow 38304
-sudo ufw allow 41357 
-sudo ufw allow 33366
-sudo ufw allow 50188
-
-
-#open port for netserver
-sudo ufw allow 12865
-sudo ufw allow 12866

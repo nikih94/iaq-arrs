@@ -38,7 +38,7 @@ cat >> ./configuration/configuration.ini <<EOF
 [network_latency]
 measurement_delta=${LATENCY_DELTA}
 central_server_ip=${NETPERF_IP}
-latency_test_timeout=10
+latency_test_timeout=60
 latency_bucket=network_latency
 EOF
 

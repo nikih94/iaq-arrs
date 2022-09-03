@@ -13,7 +13,7 @@ class NetworkTest:
     The watchdog timer to kill latency tests that take to-much time
     """
 
-    TIMEOUT = 10
+    TIMEOUT = 60
 
     """
     THE LOGGER logas events on file, stdout and central influxdb
@@ -34,13 +34,16 @@ class NetworkTest:
         self.devices.append(self.server)
         result = []
         for dev in self.devices:
+            # If testing to server behind firewall use -P 12866 to specify the data port to conduct the test
+            # 'netperf -H '+dev[0]+'  -l 3 -TCP_RR  -b 1 -v 2 -- -O mean_latency -P 12866'
             try:
                 proc = subprocess.Popen(
-                    ['netperf -H '+dev[0]+'  -l 3 -TCP_RR  -b 1 -v 2 -- -O mean_latency -P 12866'], stdout=subprocess.PIPE, shell=True)
+                    ['netperf -H '+dev[0]+'  -l 10 -TCP_RR  -b 1 -v 2 -- -O mean_latency'], stdout=subprocess.PIPE, shell=True)
                 outs, errs = proc.communicate(timeout=self.TIMEOUT)
                 lines = outs.splitlines()
                 if len(lines) == 7:
                     latency = lines[6].rstrip().decode('utf-8')
+
                     #print('Device: ', dev[0], ' latency in usec: ', latency)
                     result.append([dev[1], dev[2], latency])
             except subprocess.TimeoutExpired as t:

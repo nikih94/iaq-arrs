@@ -25,15 +25,6 @@ sudo sh get-docker.sh
 sudo rm get-docker.sh
 
 
-#Install firewall
-sudo apt-get -y install ufw
-#deny all incoming traffic
-sudo ufw default deny
-# open port 22
-sudo ufw allow 22 
-#Do not port to access local DB (security is not ready)
-#sudo ufw allow 3306 
-sudo ufw enable
 
 #set correct timezone
 timedatectl set-timezone Europe/Rome
