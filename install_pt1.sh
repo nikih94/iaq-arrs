@@ -35,7 +35,8 @@ cd ~
 mkdir -p .ssh && sudo cat ssh_keys/id_rsa.pub > .ssh/id_rsa.pub && sudo cat ssh_keys/id_rsa > .ssh/id_rsa && cd .ssh/ && touch known_hosts && sudo chmod 400 id_rsa && sudo chmod 400 id_rsa.pub && sudo chmod 600 known_hosts && cd ..
 
 #authorize the server key
-cd .ssh && touch authorized_keys && sudo cat server.pub >> /home/pi/.ssh/authorized_keys && sudo chmod 600 authorized_keys && cd ..
+touch .ssh/authorized_keys && sudo cat ssh_keys/server.pub >> .ssh/authorized_keys && sudo chmod 600 .ssh/authorized_keys 
+
 
 #reboot 
 sudo reboot

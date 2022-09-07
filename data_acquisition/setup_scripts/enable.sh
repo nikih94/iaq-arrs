@@ -49,18 +49,7 @@ echo "INFLUX_TOKEN=${TELEGRAF_TOKEN}" > /etc/default/telegraf
 #collect data service
 cp ./configuration/collect_data.service /etc/systemd/system/collect_data.service
 
-#tunnel move keys and set persmissions
-#mkdir -p /home/${USER_ON_RASPI}/.ssh
-#sudo chown ${USER_ON_RASPI} /home/${USER_ON_RASPI}/.ssh
-#cat ${SSH_PUBLIC} > /home/${USER_ON_RASPI}/.ssh/id_rsa.pub
-#cat ${SSH_PRIVATE} > /home/${USER_ON_RASPI}/.ssh/id_rsa
-#touch /home/${USER_ON_RASPI}/.ssh/known_hosts
-#sudo chown ${USER_ON_RASPI} /home/${USER_ON_RASPI}/.ssh/id_rsa 
-#sudo chown ${USER_ON_RASPI} /home/${USER_ON_RASPI}/.ssh/id_rsa.pub 
-#sudo chown ${USER_ON_RASPI} /home/${USER_ON_RASPI}/.ssh/known_hosts
-#sudo chmod 400  /home/${USER_ON_RASPI}/.ssh/id_rsa 
-#sudo chmod 400  /home/${USER_ON_RASPI}/.ssh/id_rsa.pub 
-#sudo chmod 600  /home/${USER_ON_RASPI}/.ssh/known_hosts
+
 #tunnel service
 cp ./configuration/tunnel_to_ir.service /etc/systemd/system/tunnel_to_ir.service
 
