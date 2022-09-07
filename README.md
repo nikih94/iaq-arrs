@@ -15,9 +15,13 @@
     <br>
     <a href="#">
         <img alt="GPL License" src="https://img.shields.io/badge/license-GPL-brightgreen"/>
-    </a><br>
+	</a><br>
     <a href="#">
-        <img alt="ns-3 simulator" src="https://img.shields.io/badge/simulator-ns--3-brightgreen"/>
+        <img alt="docker" src="https://img.shields.io/badge/docker-enabled-blue"/>
+    </a>
+	<br>
+    <a href="#">
+        <img alt="influx" src="https://img.shields.io/badge/influxdb-timeseries-orange"/>
     </a>
 </div>
 
