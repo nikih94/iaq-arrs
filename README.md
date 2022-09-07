@@ -57,11 +57,11 @@ Version 1.0
 
 # Documentation
 
-
+# Installation and setup
   
-# Server setup
+## Server setup
 
-## Influx DB
+### Influx DB
 
 Install influxdb on the server. Current influxDB version: *2.4.0*
 <br>
@@ -72,11 +72,12 @@ Create users and crete the following buckets:
 
 
 
-## Reverse proxy
+### Reverse proxy
 
 The reverse proxy is used to access Sensors attached to remote networks. (mainly used for maintainance)
 
-### Create the Sensor user on the Server
+<br>
+Create the Sensor user on the Server
 
 ```
 sudo useradd -m raspi
@@ -87,9 +88,7 @@ Disable the login shell for the Sensor user (raspi)
 sudo usermod raspi -s /sbin/nologin
 ```
 
-### Configure permissions for SSH connection on the Sensor user
-
-Edit the config file:
+Configure permissions for SSH connection on the Sensor user by editing the config file
 
 ```
 sudo nano /etc/ssh/sshd_config
@@ -117,7 +116,7 @@ Reload the sshd
 sudo systemctl reload sshd
 ```
 
-### Setup SSH tunnel on Sensors
+#### Setup SSH tunnel on Sensors
 
 Look at the section: [SSH tunnel](#ssh-tunnel)
 
@@ -135,35 +134,42 @@ ssh-keygen
 Move the server's ssh public key to the file *authorized_keys* on the raspi. Explained [here](#move-server-key-to-raspi)
 
 
+### Network latency
+
+To allow measure latency from sensors to serve, the netperf package must be installed `sudo apt-get install netperf` and the netserver must be running on port 12865.
+
+```netserver -4```
+
+Please ensure firewall rules allow the correct functioning.
+Netserver uses also other ports beside the 12865!!!
 
 
-# Raspi installation
 
-## Install OS and setup basics
+## Raspi installation
+
+### Install OS and setup basics
 
 Install RaspiOS with raspi-imager.
 * Mandatory: arm64 image.
 * Use the image *2022-04-04-raspios-bullseye-arm64-lite.img.xz* OR *2022-04-04-raspios-bullseye-arm64.img.xz*
 
-### Allow UART communication
+#### Allow UART communication
 
 Copy the script *To_copy_in_boot/my_config.txt* in the *boot* foler of the SD card.
 <br>
 This script will enable the UART communication and disable some things that may disturb the communication.
 
-### Setup SSH and WiFi
+#### Setup SSH and WiFi
 
 Copy *To_copy_in_boot/ssh* in the *boot* foler of the SD card.<br>
 Configure and copy *To_copy_in_boot/wpa_supplicant.conf* in the *boot* foler of the SD card.
 
 
 
-## SSH tunnel
+### SSH tunnel
 
 
-### Generate SSH keys
-
-Run the following command and press always enter
+Run the following command to generate ssh keys and press always enter
 
 ```
 ssh-keygen
@@ -190,17 +196,18 @@ cat raspi_public_key >>  /home/raspi/.ssh/authorized_keys
 Copy the server public key to the *ssh_keys* folder on the raspi. The server's ssh public key must be named *server.pub*. The folder *ssh_keys* must locate in the home directory of the user of the raspi.
 
 
-## Install the application
+### Install the application
 
 Please insert the SD card in the raspi and start the system.
 Enter the user shell in some way.
 
-### Set a password for the user
+<br>
 
-Run the command: `passwd`
+Run the command to set a new password: `passwd`
 
+<br>
 
-### Install git and download the application
+Install git and download the application
 
 ```
 sudo apt-get install git
@@ -233,15 +240,17 @@ After running the script *install_pt2.sh* check that telegraf was installed!! If
 
 If the *network_latency* component is required, it must be installed at this step.
 Run the script *install_latency_monitor.sh*
+<br>
+For the correct functioning of the *network_latency* component the *netserver* must be running on the server. Please check this section to enable: [netserver](network-latency)
 
-# Raspi replication
+## Raspi replication
 
-## Base image creation
+### Base image creation
 
 To perform this section, you must have an SD card that was prepared following the steps in [raspi installation](raspi-installation)
 <br>
 
-### Schedule a re-setup
+#### Schedule a re-setup
 
 Delete the file /home/pi/status/configured.tmp
 ```
@@ -249,7 +258,7 @@ sudo rm /home/pi/status/configured.tmp
 ```
 This will schedule a reboot and resetup when at the next system startup.
 
-### Create the base image
+#### Create the base image
 
 Perform the following:
 * Insert the SD card in the laptop.
@@ -271,7 +280,7 @@ Shrink image using [PiShrink](https://github.com/Drewsif/PiShrink)
 sudo pishrink.sh -r ./images/test.img ./images/shrinked_test.img
 ```
 
-## Image replication
+### Image replication
 
 Insert SD to overwrite in PC. Ensure, that the SD is not mounted. Run the command to copy the image to the sd:
 
@@ -281,17 +290,15 @@ sudo dd if=./images/shrinked_test.img of=/dev/mmcblk0
 ```
 *Requires more or less 10mins*
 
-### Setup the clone image
+#### Setup the clone image
 
 Mount the SD and perform the following:
-
-#### Adjust configuration file
+<br>
 
 Alter the configuration file by setting the **SENSOR_HOSTNAME** and **BUILDING** and **SERVER_PORT** building variable.
 
-#### Set the wireless supplicant
 
-Create the *wpa_supplicant.conf* and copy it to into the *boot* folder.
+Create the *wpa_supplicant.conf* and copy, set it correctly and it into the *boot* folder.
 <br>
 **The clone is now ready**
 <br>
