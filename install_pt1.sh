@@ -18,13 +18,6 @@ sudo raspi-config nonint do_serial 1
 sudo cp /boot/my_config.txt /boot/config.txt
 
 
-#download docker install script
-curl -fsSL https://get.docker.com -o get-docker.sh
-
-sudo sh get-docker.sh
-sudo rm get-docker.sh
-
-
 
 #set correct timezone
 timedatectl set-timezone Europe/Rome
@@ -36,6 +29,17 @@ mkdir -p .ssh && sudo cat ssh_keys/id_rsa.pub > .ssh/id_rsa.pub && sudo cat ssh_
 
 #authorize the server key
 touch .ssh/authorized_keys && sudo cat ssh_keys/server.pub >> .ssh/authorized_keys && sudo chmod 600 .ssh/authorized_keys 
+
+
+
+
+#download docker install script
+curl -fsSL https://get.docker.com -o get-docker.sh
+
+sudo sh get-docker.sh
+sudo rm get-docker.sh
+
+
 
 
 #reboot 
