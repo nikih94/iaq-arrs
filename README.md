@@ -120,11 +120,11 @@ sudo systemctl reload sshd
 
 Look at the section: [SSH tunnel](#ssh-tunnel)
 
-## Update raspi's remotely
+### Update raspi's remotely
 
 This will allow to run a script that will ssh raspberrys and will run commands on them. (Mainly used for updates or fixes).
 
-### Generate ssh keys of the server
+#### Generate ssh keys of the server
 
 Run the following command and press always enter. The keys will be stored in the *.ssh* folder in the home directory. If the folder does not exist create the folder `sudo mkdir .ssh`
 ```
