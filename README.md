@@ -23,7 +23,7 @@
 
 
 
-## Table of contents
+# Table of contents
 * [General info](#general-info)
 * [Acknowledgments](#acknowledgments)
 * [Technologies](#technologies)
@@ -31,11 +31,11 @@
 * [Documentation](#documentation) 
 * [Installation and Setup](#installation-and-setup)
 
-## General info
+# General info
 IoT indoor air quality monitoring platform
 
 
-## Acknowledgments
+# Acknowledgments
 
 We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej Vičič[1], and prof. dr. Michael Mrissa[1,2] for the theoretical fundations, which are the basis for this implementation.
 <br/>
@@ -44,32 +44,39 @@ We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej V
 <br/>
 [2] Innorenew CoE 
 
-## Technologies
+# Technologies
 The project builds on:
 * nsnam ns-3: 3.35
 * libsodium: 1.0.18-1
 * protobuf: 3.19.1
 	
-## Version
+# Version
 
 Version 1.0
 
 
-## Documentation
+# Documentation
 
 
   
-## Installation and Setup
+# Server setup
 
-### Server
+## Influx DB
 
-#### Influx DB
+Install influxdb on the server. Current influxDB version: *2.4.0*
+<br>
+Create users and crete the following buckets: 
+* iaq
+* network_latency
+* rpi_stats
 
-#### Reverse proxy
 
-The reverse proxy is used to access Sensors attached to remote networks, mainly for maintainance.
 
-##### Create the Sensor user on the Server
+## Reverse proxy
+
+The reverse proxy is used to access Sensors attached to remote networks. (mainly used for maintainance)
+
+### Create the Sensor user on the Server
 
 ```
 sudo useradd -m raspi
@@ -80,7 +87,7 @@ Disable the login shell for the Sensor user (raspi)
 sudo usermod raspi -s /sbin/nologin
 ```
 
-##### Configure permissions for SSH connection on the Sensor user
+### Configure permissions for SSH connection on the Sensor user
 
 Edit the config file:
 
@@ -110,42 +117,61 @@ Reload the sshd
 sudo systemctl reload sshd
 ```
 
-##### Setup SSH tunnel on Sensors
+### Setup SSH tunnel on Sensors
 
 Look at the section: [SSH tunnel](#ssh-tunnel)
 
+## Update raspi's remotely
 
-### Sensors
+This will allow to run a script that will ssh raspberrys and will run commands on them. (Mainly used for updates or fixes).
 
-#### Install OS and setup basics
+### Generate ssh keys of the server
+
+Run the following command and press always enter. The keys will be stored in the *.ssh* folder in the home directory. If the folder does not exist create the folder `sudo mkdir .ssh`
+```
+ssh-keygen
+```
+
+Move the server's ssh public key to the file *authorized_keys* on the raspi. Explained [here](#move-server-key-to-raspi)
+
+
+
+
+# Raspi installation
+
+## Install OS and setup basics
 
 Install RaspiOS with raspi-imager.
 * Mandatory: arm64 image.
-* Use the image *2022-04-04-raspios-bullseye-arm64-lite.img.xz*
+* Use the image *2022-04-04-raspios-bullseye-arm64-lite.img.xz* OR *2022-04-04-raspios-bullseye-arm64.img.xz*
 
-##### Allow UART communication
+### Allow UART communication
 
-Copy the script *To_copy_in_boot/my_config.txt* in the *boot* foler of the SD card
+Copy the script *To_copy_in_boot/my_config.txt* in the *boot* foler of the SD card.
+<br>
+This script will enable the UART communication and disable some things that may disturb the communication.
 
-##### Setup SSH and WiFi
+### Setup SSH and WiFi
 
 Copy *To_copy_in_boot/ssh* in the *boot* foler of the SD card.<br>
 Configure and copy *To_copy_in_boot/wpa_supplicant.conf* in the *boot* foler of the SD card.
 
 
 
-#### SSH tunnel
+## SSH tunnel
 
-##### Generate SSH keys
+
+### Generate SSH keys
 
 Run the following command and press always enter
+
 ```
 ssh-keygen
 ```
 
-Store the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) for later
+Store the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) in the folder *ssh_keys*. The folder must locate in the home directory of the user of the raspi.
 
-
+#### Move public key to the server
 
 Follow the following [guide](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server) to copy the ssh public key to the authorized_keys directory on the server.
 <br>
@@ -159,27 +185,22 @@ sudo su
 cat raspi_public_key >>  /home/raspi/.ssh/authorized_keys
 ```
 
+#### Move server key to raspi
 
-#### Install the application
-
-Log into the raspi and perform the following
-
-
-##### SSH keys
-
-Move the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) into `ssh_keys`
-<br>
-Execute the following commands:
-  
-  
-  
-```
-mkdir -p /home/pi/.ssh && sudo cat ssh_keys/id_rsa.pub > /home/pi/.ssh/id_rsa.pub && sudo cat ssh_keys/id_rsa > /home/pi/.ssh/id_rsa && cd .ssh/ && touch known_hosts && sudo chmod 400 id_rsa && sudo chmod 400 id_rsa.pub && sudo chmod 600 known_hosts && cd ..
-
-```
+Copy the server public key to the *ssh_keys* folder on the raspi. The server's ssh public key must be named *server.pub*. The folder *ssh_keys* must locate in the home directory of the user of the raspi.
 
 
-##### Install git and download the application
+## Install the application
+
+Please insert the SD card in the raspi and start the system.
+Enter the user shell in some way.
+
+### Set a password for the user
+
+Run the command: `passwd`
+
+
+### Install git and download the application
 
 ```
 sudo apt-get install git
@@ -187,17 +208,15 @@ git clone https://github.com/nikih94/iaq-arrs
 ```
 
 
-##### Configuration file
+### Configuration file 
 
 
 The sensor is configured by setting variables in the file *configuration_template.sh* to the appropriate values. The file must be then renamed to: *configuration.sh*
 All variables are explained with comments.
 
-##### Set the raspi password
 
-Use the `passwd` command to set a new password
 
-##### Installation scripts
+### Installation scripts
 
 Run the two installation scripts respectively *install_pt1.sh* and *install_pt2.sh* the system will reboot between scripts.
 <br>
@@ -207,11 +226,32 @@ sudo rm -r /var/lib/apt/lists/*
 sudo apt update
 ```
 Then re-run *install_pt1.sh*.
+<br>
+After running the script *install_pt2.sh* check that telegraf was installed!! If it was not installed run the command `sudo apt-get update` and re-run the script *install_pt2.sh*.
 
+### Installation of *network_latency* component
 
-##### DD command to replicate the system to all sensors
+If the *network_latency* component is required, it must be installed at this step.
+Run the script *install_latency_monitor.sh*
 
-Do next steps:
+# Raspi replication
+
+## Base image creation
+
+To perform this section, you must have an SD card that was prepared following the steps in [raspi installation](raspi-installation)
+<br>
+
+### Schedule a re-setup
+
+Delete the file /home/pi/status/configured.tmp
+```
+sudo rm /home/pi/status/configured.tmp
+```
+This will schedule a reboot and resetup when at the next system startup.
+
+### Create the base image
+
+Perform the following:
 * Insert the SD card in the laptop.
 * The SD card must NOT be mounted
 * List all attacheed devices `sudo fdisk -l`
@@ -219,47 +259,43 @@ Do next steps:
 
 ```
 sudo umount /dev/mmcblk0 
-sudo dd if=/dev/mmcblk0 of=/home/niki/Desktop/ARRS/production_images/test.img
+sudo dd if=/dev/mmcblk0 of=./images/test.img
 ```
 
-*Requires 3.5mins*
+*Requires more or less 3.5mins*
 
 <br>
 Shrink image using [PiShrink](https://github.com/Drewsif/PiShrink)
 
 ```
-sudo pishrink.sh /home/niki/Desktop/ARRS/production_images/test.img
+sudo pishrink.sh -r ./images/test.img ./images/shrinked_test.img
 ```
 
-##### The following sections must be performed on each raspi
+## Image replication
 
-Insert empty SD in laptop. Run the command to copy the image to the sd:
+Insert SD to overwrite in PC. Ensure, that the SD is not mounted. Run the command to copy the image to the sd:
 
 ```
 sudo umount /dev/mmcblk0 
-sudo dd if=/home/niki/Desktop/ARRS/production_images/test.img of=/dev/mmcblk0
+sudo dd if=./images/shrinked_test.img of=/dev/mmcblk0
 ```
-*Requires 5mins*
+*Requires more or less 10mins*
 
+### Setup the clone image
 
-<br>
+Mount the SD and perform the following:
 
-Insert the SD and perform the following:
-
-###### Schedule a re-setup
-
-Delete the file /home/pi/status/configured.tmp
-<br>
-
-###### Adjust configuration file
+#### Adjust configuration file
 
 Alter the configuration file by setting the **SENSOR_HOSTNAME** and **BUILDING** and **SERVER_PORT** building variable.
 
-###### Set the wireless supplicant
+#### Set the wireless supplicant
 
-Copy a new *wpa_supplicant.conf* file into boot
-
-###### Sensors are now ready
+Create the *wpa_supplicant.conf* and copy it to into the *boot* folder.
+<br>
+**The clone is now ready**
+<br>
+Insert the SD card into the raspberry
 
 
 
