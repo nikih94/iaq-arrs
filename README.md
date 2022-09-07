@@ -46,9 +46,15 @@ We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej V
 
 # Technologies
 The project builds on:
-* nsnam ns-3: 3.35
-* libsodium: 1.0.18-1
-* protobuf: 3.19.1
+* influxdb: 2,4,0
+* docker: 20.10.17
+	- linux-alpine: 3.15
+* netperf: 2.7
+* avahi: 0.8
+* raspberryOs: debian-11-bullseye
+* python
+* mariadb: 10.4.24
+* minimalmodbus
 	
 # Version
 
@@ -56,6 +62,8 @@ Version 1.0
 
 
 # Documentation
+
+## TO-DO
 
 # Installation and setup
   
