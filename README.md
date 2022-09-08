@@ -159,12 +159,17 @@ The file *update-command-list.txt* contains commands that will be executed on se
 <br>
 An example of the file *update-command-list.txt*:
 ```
+echo "Updating raspi"
 hostname
+pwd
 cd iaq-arrs
 git pull
 #--- here execute some commands to perform updates
 #--- end custom commands
 cd ..
+sudo rm ./status/configured.tmp
+sudo shutdown -r
+echo "Now rebooting"
 ```
 
 An example of the file *all-rpi-host-file.txt*:
@@ -177,20 +182,6 @@ pi@localhost:22203
 pi@localhost:22204
 ```
 
-#### Apply updates
-
-To apply updates, the raspi must be rebooted. Perform reboot by running pssh command:
-
-```
-cat apply_updates.txt | parallel-ssh -o out/  -h all-rpi-host-file.txt -X '-o StrictHostKeyChecking=no' -X '-o PasswordAuthentication=no'  --send-input
-```
-
-Example of the *apply_updates.txt* file:
-
-```
-sudo rm ./status/configured.tmp
-sudo reboot
-```
 
 
 
