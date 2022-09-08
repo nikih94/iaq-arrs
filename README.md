@@ -146,6 +146,19 @@ ssh-keygen
 Move the server's ssh public key to the file *authorized_keys* on the raspi. Explained [here](#move-server-key-to-raspi)
 
 
+#### Update
+
+
+Run the command:
+
+
+```
+cat update-command-list.txt | parallel-ssh -o out/  -h all-rpi-host-file.txt -x 'StrictHostKeyChecking=no' -x 'PasswordAuthentication=no'  --send-input
+```
+
+An example of the file *update-command-list.txt* 
+
+
 ### Network latency
 
 To allow measure latency from sensors to serve, the netperf package must be installed `sudo apt-get install netperf` and the netserver must be running on port 12865.
