@@ -152,7 +152,7 @@ Run the command:
 
 
 ```
-cat update-command-list.txt | parallel-ssh -o out/  -h all-rpi-host-file.txt -x 'StrictHostKeyChecking=no' -x 'PasswordAuthentication=no'  --send-input
+cat update-command-list.txt | parallel-ssh -o out/  -h all-rpi-host-file.txt -X '-o StrictHostKeyChecking=no' -X '-o PasswordAuthentication=no'  --send-input
 ```
 
 The file *update-command-list.txt* contains commands that will be executed on sensor specified in the file *all-rpi-host-file.txt*.
