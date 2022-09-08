@@ -69,9 +69,8 @@ Version 1.0
 
 ## TO-DO
 
-# Installation and setup
-  
-## Server setup
+
+# Server installation and setup
 
 ### Influx DB
 
@@ -84,7 +83,7 @@ Create users and crete the following buckets:
 
 
 
-### Reverse proxy
+## Reverse proxy
 
 The reverse proxy is used to access Sensors attached to remote networks. (mainly used for maintainance)
 
@@ -128,15 +127,15 @@ Reload the sshd
 sudo systemctl reload sshd
 ```
 
-#### Setup SSH tunnel on Sensors
+### Setup SSH tunnel on Sensors
 
 Look at the section: [SSH tunnel](#ssh-tunnel)
 
-### Update raspi's remotely
+## Update raspi's remotely
 
 This will allow to run a script that will ssh raspberrys and will run commands on them. (Mainly used for updates or fixes).
 
-#### Generate ssh keys of the server
+### Generate ssh keys of the server
 
 Run the following command and press always enter. The keys will be stored in the *.ssh* folder in the home directory. If the folder does not exist create the folder `sudo mkdir .ssh`
 ```
@@ -146,7 +145,7 @@ ssh-keygen
 Move the server's ssh public key to the file *authorized_keys* on the raspi. Explained [here](#move-server-key-to-raspi)
 
 
-#### Update
+### Update
 
 
 Run the command:
@@ -156,10 +155,34 @@ Run the command:
 cat update-command-list.txt | parallel-ssh -o out/  -h all-rpi-host-file.txt -x 'StrictHostKeyChecking=no' -x 'PasswordAuthentication=no'  --send-input
 ```
 
-An example of the file *update-command-list.txt* 
+The file *update-command-list.txt* contains commands that will be executed on sensor specified in the file *all-rpi-host-file.txt*.
+<br>
+An example of the file *update-command-list.txt*:
+```
+hostname
+cd iaq-arrs
+git pull
+#--- here execute some commands to perform updates
+#--- end custom commands
+cd ..
+sudo rm ./status/configured.tmp
+sudo reboot
+```
+
+An example of the file *all-rpi-host-file.txt*:
+
+```
+pi@localhost:22200
+pi@localhost:22201
+pi@localhost:22202
+pi@localhost:22203
+pi@localhost:22204
+```
 
 
-### Network latency
+
+
+## Network latency
 
 To allow measure latency from sensors to serve, the netperf package must be installed `sudo apt-get install netperf` and the netserver must be running on port 12865.
 
@@ -170,28 +193,28 @@ Netserver uses also other ports beside the 12865!!!
 
 
 
-## Raspi installation
+# Raspi installation
 
-### Install OS and setup basics
+## Install OS and setup basics
 
 Install RaspiOS with raspi-imager.
 * Mandatory: arm64 image.
 * Use the image *2022-04-04-raspios-bullseye-arm64-lite.img.xz* OR *2022-04-04-raspios-bullseye-arm64.img.xz*
 
-#### Allow UART communication
+### Allow UART communication
 
 Copy the script *To_copy_in_boot/my_config.txt* in the *boot* foler of the SD card.
 <br>
 This script will enable the UART communication and disable some things that may disturb the communication.
 
-#### Setup SSH and WiFi
+### Setup SSH and WiFi
 
 Copy *To_copy_in_boot/ssh* in the *boot* foler of the SD card.<br>
 Configure and copy *To_copy_in_boot/wpa_supplicant.conf* in the *boot* foler of the SD card.
 
 
 
-### SSH tunnel
+## SSH tunnel
 
 
 Run the following command to generate ssh keys and press always enter
@@ -202,7 +225,7 @@ ssh-keygen
 
 Store the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) in the folder *ssh_keys*. The folder must locate in the home directory of the user of the raspi.
 
-#### Move public key to the server
+### Move public key to the server
 
 Follow the following [guide](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server) to copy the ssh public key to the authorized_keys directory on the server.
 <br>
@@ -216,12 +239,12 @@ sudo su
 cat raspi_public_key >>  /home/raspi/.ssh/authorized_keys
 ```
 
-#### Move server key to raspi
+### Move server key to raspi
 
 Copy the server public key to the *ssh_keys* folder on the raspi. The server's ssh public key must be named *server.pub*. The folder *ssh_keys* must locate in the home directory of the user of the raspi.
 
 
-### Install the application
+## Install the application
 
 Please insert the SD card in the raspi and start the system.
 Enter the user shell in some way.
@@ -305,7 +328,7 @@ Shrink image using [PiShrink](https://github.com/Drewsif/PiShrink)
 sudo pishrink.sh -r ./images/test.img ./images/shrinked_test.img
 ```
 
-### Image replication
+## Image replication
 
 Insert SD to overwrite in PC. Ensure, that the SD is not mounted. Run the command to copy the image to the sd:
 
