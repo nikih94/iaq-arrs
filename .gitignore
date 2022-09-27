@@ -1,4 +1,5 @@
 configuration/*
 configuration.sh
 configuration.ini
+To_copy_in_boot/*
 ssh_keys/*
