@@ -32,7 +32,6 @@ EOF
 cat > configuration/check_network.timer <<EOF
 [Unit]
 Description=Execute service to verify the network and reboot system if network is not working
-Requires=check_network.service
 
 [Timer]
 Unit=check_network.service
