@@ -18,7 +18,6 @@ fi
 cat > configuration/check_network.service <<EOF
 [Unit]
 Description=Execute script to verify the network and reboot system if network is not working
-Wants=check_network.timer
 
 [Service]
 Type=oneshot
@@ -35,7 +34,6 @@ Description=Execute service to verify the network and reboot system if network i
 
 [Timer]
 Unit=check_network.service
-OnBootSec=15min
 OnCalendar=*:0/15
 
 [Install]
