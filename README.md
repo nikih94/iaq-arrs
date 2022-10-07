@@ -41,10 +41,10 @@ IoT indoor air quality monitoring platform
 
 # Acknowledgments
 
-We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej Vičič[1], and prof. dr. Michael Mrissa[1,2] for the theoretical fundations, which are the basis for this implementation.
+We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej Vičič[1], and prof. dr. Michael Mrissa[1,2] for the theoretical foundations, which are the basis for this implementation.
 <br/>
 <br/>
-[1] University of Primorska Faculty of Mathematics, Natural Sciences and Information Technologies
+[1] University of Primorska, Faculty of Mathematics, Natural Sciences and Information Technologies
 <br/>
 [2] Innorenew CoE 
 
@@ -76,7 +76,7 @@ Version 1.0
 
 Install influxdb on the server. Current influxDB version: *2.4.0*
 <br>
-Create users and crete the following buckets: 
+Create users and create the following buckets: 
 * iaq
 * network_latency
 * rpi_stats
@@ -85,7 +85,7 @@ Create users and crete the following buckets:
 
 ## Reverse proxy
 
-The reverse proxy is used to access Sensors attached to remote networks. (mainly used for maintainance)
+The reverse proxy is used to access sensors attached to remote networks. (mainly used for maintenance)
 
 <br>
 Create the Sensor user on the Server
