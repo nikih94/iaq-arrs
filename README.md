@@ -69,6 +69,24 @@ Version 1.0
 
 ## TO-DO
 
+### Hardware requirements
+ * 1 16Gb microSD Class 10 card
+ * 1 raspberry Pi v4b + charger and case (extra hole to drill in the back of the red part over the SD card reader)
+ * 1 Sensor
+
+### Installation procedure
+Install the Raspberry Pi imager program, start it.
+Select "Use custom" and your raspi Pi image, to download [here](https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2022-04-07/2022-04-04-raspios-bullseye-arm64.img.xz)
+
+Click on the "configuration" icon (a little wheel in the bottom right corner) it opens a new window where you will select "always use" and then set your keyboard layout and language, enable SSH with "use password authentication" and leave the other options by default.
+
+Select your SD card and click "Write"
+After the writing is successful, insert the SD card into your RPI.
+
+Next, plug the sensor shown in the image below (Pins ...)
+
+The basic Raspi installation procedure starts. You can choose
+
 
 # Server installation and setup
 
