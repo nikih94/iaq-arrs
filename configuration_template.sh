@@ -101,8 +101,9 @@ TELEGRAF_TOKEN=
 ####
 
 #No need to change, just point at where SSH_KEYS are located
-SSH_PUBLIC=./ssh_keys/id_rsa.pub
-SSH_PRIVATE=./ssh_keys/id_rsa
+SSH_PUBLIC=/ssh_keys/id_rsa.pub
+SSH_PRIVATE=/ssh_keys/id_rsa
+SSH_SERVER_KEY=/ssh_keys/server.pub
 
 
 ####

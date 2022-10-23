@@ -25,10 +25,10 @@ timedatectl set-timezone Europe/Rome
 cd ~
 
 #Set ssh keys
-mkdir -p .ssh && sudo cat ssh_keys/id_rsa.pub > .ssh/id_rsa.pub && sudo cat ssh_keys/id_rsa > .ssh/id_rsa && cd .ssh/ && touch known_hosts && sudo chmod 400 id_rsa && sudo chmod 400 id_rsa.pub && sudo chmod 600 known_hosts && cd ..
+mkdir -p .ssh && sudo cat ${SSH_PUBLIC} > .ssh/id_rsa.pub && sudo cat ${SSH_PRIVATE} > .ssh/id_rsa && cd .ssh/ && touch known_hosts && sudo chmod 400 id_rsa && sudo chmod 400 id_rsa.pub && sudo chmod 600 known_hosts && cd ..
 
 #authorize the server key
-touch .ssh/authorized_keys && sudo cat ssh_keys/server.pub >> .ssh/authorized_keys && sudo chmod 600 .ssh/authorized_keys 
+touch .ssh/authorized_keys && sudo cat ${SSH_SERVER_KEY} >> .ssh/authorized_keys && sudo chmod 600 .ssh/authorized_keys 
 
 
 
