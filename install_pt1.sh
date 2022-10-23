@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Load the configuration variables
+. ./configuration.sh
+
 
 # Notify that the script must be run with sudo 
 if [[ $UID != 0 ]]; then
@@ -22,7 +25,7 @@ sudo cp /boot/my_config.txt /boot/config.txt
 #set correct timezone
 timedatectl set-timezone Europe/Rome
 
-cd ~
+cd /home/${USER_ON_RASPI}/
 
 #Set ssh keys
 mkdir -p .ssh && sudo cat ${SSH_PUBLIC} > .ssh/id_rsa.pub && sudo cat ${SSH_PRIVATE} > .ssh/id_rsa && cd .ssh/ && touch known_hosts && sudo chmod 400 id_rsa && sudo chmod 400 id_rsa.pub && sudo chmod 600 known_hosts && cd ..
