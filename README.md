@@ -209,7 +209,9 @@ Perform the following:
 * Use the **dd** command to create a new image
 
 ```
-sudo umount /dev/mmcblk0 
+sudo umount /dev/mmcblk0p1
+sudo umount /dev/mmcblk0p2
+less /proc/mounts |grep mm
 sudo dd if=/dev/mmcblk0 of=./images/test.img
 ```
 
@@ -227,7 +229,9 @@ sudo pishrink.sh -r ./images/test.img ./images/shrinked_test.img
 Insert SD to overwrite in PC. Ensure, that the SD is not mounted. Run the command to copy the image to the sd:
 
 ```
-sudo umount /dev/mmcblk0 
+sudo umount /dev/mmcblk0p1
+sudo umount /dev/mmcblk0p2
+less /proc/mounts |grep mm
 sudo dd if=./images/shrinked_test.img of=/dev/mmcblk0
 ```
 *Requires more or less 10mins*
