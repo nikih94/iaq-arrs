@@ -220,6 +220,77 @@ dmesg | grep watchdog
 ```
 
 
+## Eduroam network connection
+
+
+
+### Step-1-modify the network interface file
+
+Modify the file *sudo nano /etc/network/interfaces* as follows:
+
+
+```bash
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# Include files from /etc/network/interfaces.d:
+source /etc/network/interfaces.d/*
+
+#add code below this line --------
+auto lo
+iface eth0 inet dhcp
+
+
+auto wlan0
+allow-hotplug wlan0
+killall -q wpa_supplicant
+iface wlan0 inet dhcp
+ pre-up wpa_supplicant -B -D wext -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf
+ post-down killall -q wpa_supplicant
+```
+
+
+### Step-2-modify DHCP config file
+
+Move to the bottom of the DHCP config file *sudo nano /etc/dhcpcd.conf* and add the following:
+
+```bash
+
+interface wlan0
+env ifwireless = 1
+env wpa_supplicant_driver = wext, nl80211
+
+```
+
+
+### Step-3-create the wpa_supplicant.conf file
+
+The file must be located in: */etc/wpa_supplicant/wpa_supplicant.conf*
+
+
+```bash
+
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=SI
+
+network={
+        ssid="eduroam"
+        proto=RSN
+        key_mgmt=WPA-EAP
+        pairwise=CCMP
+        eap=TTLS
+        identity="userID"
+        anonymous_identity="anonymousID"
+        password="********"
+        phase2="auth=PAP"
+        priority=1
+}
+
+```
+
+
+
+
+
 
 ## Install the application
 
