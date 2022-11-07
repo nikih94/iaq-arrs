@@ -276,7 +276,7 @@ Delete the file /home/pi/status/configured.tmp
 ```
 sudo rm /home/pi/status/configured.tmp
 ```
-This will schedule a reboot and resetup when at the next system startup.
+This will schedule a reconfiguration at the next system startup.
 
 #### Create the base image
 
