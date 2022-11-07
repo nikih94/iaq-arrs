@@ -52,7 +52,7 @@ url=${INFLUX_URL}
 org=${INFLUX_ORG}
 token=${INFLUX_TOKEN}
 timeout=${INFLUX_TIMEOUT}
-verify_ssl=False
+verify_ssl=True
 log_bucket=${INFLUX_LOG_BUCKET}
 EOF
 
