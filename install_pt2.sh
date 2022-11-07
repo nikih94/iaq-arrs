@@ -97,7 +97,7 @@ Description=Execute service to verify the network and reboot system if network i
 
 [Timer]
 Unit=check_network.service
-OnCalendar=*:0/15
+OnCalendar=${WATCHDOG_TIMER}
 
 [Install]
 WantedBy=timers.target

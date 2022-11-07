@@ -15,7 +15,7 @@ done
 
 if [ $? != 0 ] 
 then
-	echo "No netowkr... rebooting" 
+	echo "No network... rebooting" 
   	sudo /sbin/shutdown -r now
 fi
 

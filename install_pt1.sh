@@ -34,6 +34,7 @@ mkdir -p .ssh && sudo cat ${SSH_PUBLIC} > .ssh/id_rsa.pub && sudo cat ${SSH_PRIV
 touch .ssh/authorized_keys && sudo cat ${SSH_SERVER_KEY} >> .ssh/authorized_keys && sudo chmod 600 .ssh/authorized_keys 
 
 
+sudo chown -R iaq-sensor: /home/iaq-sensor/.ssh
 
 
 #download docker install script
