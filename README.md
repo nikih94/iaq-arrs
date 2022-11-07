@@ -109,10 +109,27 @@ The table below gives the correct wiring of the sensor to the raspberry PI.
 
 #### IAQ sensor - cables type 1
 
+<img
+  src="./example_images/sens-wiring-type1.jpg"
+  alt="IAQ sensor - cables type 1"
+  title="IAQ sensor - cables type 1"
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
 
 #### IAQ sensor - cables type 2 
 
 Please, pay attention to distinguishing the gray and the white cable correctly.
+
+<img
+  src="./example_images/sens-wiring-type2b.jpg"
+  alt="IAQ sensor - cables type 1"
+  title="IAQ sensor - cables type 1"
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
+
+<img
+  src="./example_images/sens-wiring-type2a.jpg"
+  alt="IAQ sensor - cables type 1"
+  title="IAQ sensor - cables type 1"
+  style="display: inline-block; margin: 0 auto; max-width: 300px; height: 500px;">
 
 
 
