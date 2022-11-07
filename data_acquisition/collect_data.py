@@ -73,7 +73,7 @@ class CollectData:
     """
 
     def main_event_loop(self, sc):
-        print("Read data...")
+        #print("Read data...")
         s.enter(self.delta, 1, self.main_event_loop, (sc,))
         # do your stuff
         try:
