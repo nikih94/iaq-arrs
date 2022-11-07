@@ -89,6 +89,33 @@ Plug a keyboard, a mouse, a screen, and start the RPI. You can now configure you
 Once the wifi is connected, you are ready.
 # Raspi installation
 
+## Raspi-to-sensor wiring
+
+The sensor is communicating with the raspberry PI using the UART protocol, therefore requiring two transmission cables, 5V, and common ground.
+Sensors have two different wiring colors (yellow, orange, red, brown) and (purple, gray, white, black).
+<br/>
+The table below gives the correct wiring of the sensor to the raspberry PI.
+
+
+
+| Raspberry PI | IAQ sensor - cables type 1 | IAQ sensor - cables type 2 |
+| ------------ | ------------------- | ------------------- |
+| GPIO 14 (tx) | yellow (rx)         | purple (rx)         |
+| GPIO 15 (rx) | orange (tx)         | gray (tx)           |
+| 5V           | red                 | white               |
+| GND          | brown               | black               | 
+
+### Some example figures
+
+#### IAQ sensor - cables type 1
+
+
+#### IAQ sensor - cables type 2 
+
+Please, pay attention to distinguishing the gray and the white cable correctly.
+
+
+
 ## Install OS and setup basics
 
 Install RaspiOS with raspi-imager.
