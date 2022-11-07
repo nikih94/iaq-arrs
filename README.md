@@ -117,7 +117,7 @@ Run the following command to generate ssh keys and press always enter
 ssh-keygen
 ```
 
-Store the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) in the folder *ssh_keys*. The folder must locate in the home directory of the user of the raspi.
+Store the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) in the folder *ssh_keys* in the root directory.
 
 ### Move public key to the server
 
@@ -135,17 +135,95 @@ cat raspi_public_key >>  /home/raspi/.ssh/authorized_keys
 
 ### Move server key to raspi
 
-Copy the server public key to the *ssh_keys* folder on the raspi. The server's ssh public key must be named *server.pub*. The folder *ssh_keys* must locate in the home directory of the user of the raspi.
+Copy the server public key to the *ssh_keys* folder on the raspi. The server's ssh public key must be named *server.pub*. 
 
 
-## Install the application
+## Create new user and disable autologin
 
 Please insert the SD card in the raspi and start the system.
 Enter the user shell in some way.
 
-<br>
+### Create new user
 
-Run the command to set a new password: `passwd`
+Run the command 
+```bash
+sudo adduser iaq-sensor
+````
+Enter the password, and enter all default infos.
+
+### Assign groups
+
+Assign user groups of the pi user to the new user
+Run the command:
+
+```bash
+groups | sed 's/pi //g' | sed 's/ /,/g' | xargs -I{} sudo usermod -a -G {} iaq-sensor
+```
+
+### Copy the pi home directory to the new user
+
+Copy the home with:
+```bash
+sudo cp -R /home/pi/. /home/iaq-sensor
+```
+
+Change ownership with:
+```bash
+sudo chown -R iaq-sensor: /home/iaq-sensor
+```
+
+
+### Reconfigure boot user and autologin
+
+Log in as the new user
+Run the command  
+```bash 
+sudo raspi-config
+```
+
+Got to `System options` then `boot / autologin` then select `B3`
+Close and reboot
+
+### Delete the pi user
+
+Run the command 
+```bash
+sudo deluser --remove-home pi
+```
+
+
+## Enable the hardware watchdog
+
+The raspi4 has a hardware watchdog, that can turn on the raspi also after kernel errors.
+
+Modify the file 
+```bash 
+sudo nano /etc/systemd/system.conf
+```
+
+The following lines:
+```bash
+RuntimeWatchdogSec=14
+ShutdownWatchdogSec=5min
+```
+
+!Attention!:
+The line `RuntimeWatchdogSec=14` cannot be more than 15 seconds.
+
+<br>
+Reboot required
+
+### Check if wathcdog active
+
+```bash
+dmesg | grep watchdog
+```
+
+
+
+## Install the application
+
+
 
 <br>
 
