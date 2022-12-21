@@ -24,7 +24,7 @@ WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/
 ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/setup.sh" 
 ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/enable.sh" 
 ExecStart=/bin/bash -c "./latency_monitor/setup_scripts/setup.sh" 
-ExecStop=/bin/bash -c "./verify_status.sh"
+ExecStop=/bin/bash -c "runuser -l ${USER_ON_RASPI} -c "\""./iaq-arrs/verify_status.sh"\"""
 
 [Install]
 WantedBy=multi-user.target
@@ -35,7 +35,7 @@ EOF
 cp ./configuration/setup_iaq_monitoring.service /etc/systemd/system/setup_iaq_monitoring.service
 
 #The script will run only if the file /home/${USER_ON_RASPI}/status/configured.tmp exists
-mkdir -p /home/${USER_ON_RASPI}/status
+sudo runuser -l ${USER_ON_RASPI} -c "/usr/bin/mkdir /home/${USER_ON_RASPI}/status"
 
 #enable the service
 sudo systemctl enable setup_iaq_monitoring.service
