@@ -161,7 +161,7 @@ Run the following command to generate ssh keys and press always enter
 ssh-keygen
 ```
 
-Store the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) in the folder *ssh_keys* in the root directory.
+Store the SSH keys (private key: **id_rsa** public key: **id_rsa.pub**) in the folder */ssh_keys* in the root directory of the raspi.
 
 ### Move public key to the server
 
@@ -179,7 +179,7 @@ cat raspi_public_key >>  /home/raspi/.ssh/authorized_keys
 
 ### Move server key to raspi
 
-Copy the server public key to the *ssh_keys* folder on the raspi. The server's ssh public key must be named *server.pub*. 
+Copy the server public key to the */ssh_keys* folder on the raspi. The server's ssh public key must be named *server.pub*. 
 
 
 ## Create new user and disable autologin
