@@ -8,7 +8,7 @@
     </h3>
     <h3>
         <img alt="Up-famnit Logo" src="https://www.famnit.upr.si/img/UP_FAMNIT.png"  height ="100px">
-        <img alt="InnoRenew Logo" src="https://innorenew.eu/app/themes/innorenew/assets/img/logo_color.svg" style="vertical-align: middle" height ="100px">
+        <img alt="InnoRenew Logo" src="https://innorenew.eu/app/themes/innorenew/assets/img/logo_color.svg"  height ="100px">
   </h3>
   </div>
   <div align="left">
@@ -214,6 +214,24 @@ sudo cp -R /home/pi/. /home/iaq-sensor
 Change ownership with:
 ```bash
 sudo chown -R iaq-sensor: /home/iaq-sensor
+```
+
+## Allow passwordless reboot for pssh
+
+```bash
+sudo visudo
+```
+add the following line to the `visudo` file
+
+```plain
+iaq-sensor ALL=(root)  NOPASSWD: /usr/sbin/reboot ""
+```
+
+### Mask the shutdown command
+
+The raspi cannot be turned off!!
+```bash
+sudo systemctl mask poweroff.target
 ```
 
 
