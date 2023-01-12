@@ -49,4 +49,5 @@ class SensorReader(Thread):
         sc.enter(float(self.config.measurement_delta),
                  1, self.sensing_loop, (self.s,))
         #print(self.sensor.dummy_read(), flush=True)
+        self.sensor.run_sync_client()
         print(self.sensor.read_sensor(), flush=True)
