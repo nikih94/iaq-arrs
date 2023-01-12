@@ -1,26 +1,27 @@
-version: "3.5"
-
+version: "3.3"
 services:
-    sensor-rx:
-        container_name: sensor-rx
-        #commented device for PC execution
-        #        devices:
-        #            - '/dev/serial0:/dev/serial0'
-        build: sensor-reader/.
+    data-collection:
+        container_name: data-collection
+        devices:
+            - '/dev/serial0:/dev/serial0'
+        build: data-collection/.
         restart: always
-        command: sh -c "ls /iaq-arrs && cd ./iaq-arrs/src && python main.py"
         depends_on:
             #prevents container to start before other container, on which it depends
             - database
         networks:
             - mynet
+        command: sh -c "cd ./iaq-arrs/data_acquisition/ && python collect_data.py"
         volumes:
-            - ./../sensor_reader:/iaq-arrs/
-            - ./../configuration.ini:/iaq-arrs/configuration.ini
+            #- ./data-collection/log:/arrs_or/data_acquisition/client/log
+            - ./..:/iaq-arrs/data_acquisition/
+            #- ./../../configuration/configuration.ini:/iaq-arrs/data_acquisition/configuration.ini
     database:
+        #build: database/.
         image: mariadb:10.4.24
         container_name: database
         restart: always
+        #user: root #not good, to start container as root
         networks:
             - mynet
         env_file:
@@ -28,6 +29,7 @@ services:
         volumes:
             - ./database/my.cnf:/etc/mysql/my.cnf
             - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+            #-  /opt/mysql_data:/var/lib/mysql #persistent storage on local machine
             - mariadb-data:/var/lib/mysql
         ports:
             - '127.0.0.1:3306:3306' #expose only to localhost
