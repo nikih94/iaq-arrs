@@ -2,4 +2,8 @@ configuration/*
 configuration.sh
 configuration.ini
 To_copy_in_boot/*
+data_acquisition/configuration.ini
 ssh_keys/*
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
