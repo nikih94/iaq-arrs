@@ -69,6 +69,7 @@ class Sensor:
 
     def log_raw(self, data):
         data = decoding_sensor.decode_all_to_hex(data)
+        print(data)
         data_string = ''
         for el in data:
             data_string = data_string + str(el)
