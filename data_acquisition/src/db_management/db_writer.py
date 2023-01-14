@@ -79,7 +79,7 @@ class DB_writer(Thread):
     def process_queue_items(self):
         while True:
             item = self.queue.get()
-            print(item.value, item.entry_counter, flush=True)
+#            print(item.value, item.entry_counter, flush=True)
             self.router(item)
 
     """
