@@ -110,9 +110,12 @@ class Sensor:
             raise
         print("xread")
         sensor_data.append(self.get_timestamp())
+        print(sensor_data)
         self.raw_count()
         if self.r_counter % self.w_limit == 0:
+            print("yread")
             self.log_raw(res)
+        print("zread")
         return sensor_data
 
     """
