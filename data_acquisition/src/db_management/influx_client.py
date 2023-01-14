@@ -31,7 +31,7 @@ class InfluxDB:
     def connectDB(self):
         if self.influxdb_client == None or not self.influxdb_client.ping():
             self.influxdb_client = InfluxDBClient.from_config_file(
-                '../configuration.ini')
+                './configuration.ini')
 
     def test_retry(self):
         print("Testing retry: ", self.test_retry_count, flush=True)

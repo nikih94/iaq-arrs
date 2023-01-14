@@ -35,7 +35,7 @@ class DataCollector():
     def __init__(self):
         self.queue = PriorityQueue()
         self.queue.put(CriticalError("restart", 1))
-        self.configuration = Configuration('../configuration.ini')
+        self.configuration = Configuration('./configuration.ini')
         sensor_e_logger.QUEUE = self.queue
         self.sensor_e_logger = sensor_e_logger.get_logger("error_logger")
         pass
