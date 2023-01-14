@@ -93,6 +93,11 @@ class Sensor:
 
     def read_sensor(self):
         try:
+            self.run_sync_client()
+        except Exception as e:
+            self.logger.error("Failed to sync to sensor: "+str(e))
+            raise
+        try:
             # function from minimalmodbus
             res = self.instrument.read_registers(0, 124, 4)
         except Exception as e:
