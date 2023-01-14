@@ -110,7 +110,7 @@ class DB_writer(Thread):
             sensor_data = self.influx.clean_data(queue_item.value)
         except Exception as e:
             self.logger.error(
-                "Error during data validation " + str(e))
+                "Error during data validation " + str(e) + " data: " + ''.join(str(x) for x in queue_item.value))
             return
         if sensor_data is not None:
             self.save_to_influx(sensor_data)
