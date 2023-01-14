@@ -54,7 +54,6 @@ class InfluxErrManager(InfluxDB):
     """
     @retry(tries=3, delay=10)
     def sensor_not_responding(self):
-        self.test_retry()
         # --setup from config file
         self.connectDB()
         write_api = self.influxdb_client.write_api(write_options=SYNCHRONOUS)
