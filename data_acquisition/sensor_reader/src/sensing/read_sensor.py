@@ -89,5 +89,12 @@ class SensorReader(Thread):
     @retry(tries=3, delay=10)
     def read_sensor(self):
         l = self.sensor.read_sensor()
+        if self.entry_counter == 5:
+            l[3] = 'banana'
+        elif self.entry_counter == 7:
+            l[10] == "kek"
+        elif self.entry_counter == 9:
+            l[6] == "nul"
         d = DataItem(l, self.entry_counter)
         self.queue.put(d)
+        self.count()
