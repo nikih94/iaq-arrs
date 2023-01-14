@@ -109,7 +109,7 @@ class Sensor:
             self.logger.error("Failed to decode registers: "+str(e))
             raise
         sensor_data.append(self.get_timestamp())
-        print(sensor_data)
+        # print(sensor_data)
         self.raw_count()
         if self.r_counter % self.w_limit == 0:
             self.log_raw(res)

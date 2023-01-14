@@ -64,7 +64,7 @@ class DB_writer(Thread):
         self.configuration = configuration
         self.influx = InfluxErrManager(self.configuration)
         db_e_logger.INFLUX = self.influx
-        self.logger = db_e_logger.get_logger("error_logger")
+        self.logger = db_e_logger.get_logger("er_logger")
         self.local_db = LocalDB(self.configuration, self.logger)
         pass
 
@@ -79,7 +79,7 @@ class DB_writer(Thread):
     def process_queue_items(self):
         while True:
             item = self.queue.get()
-            print(item.value, item.entry_counter, flush=True)
+#            print(item.value, item.entry_counter, flush=True)
             self.router(item)
 
     """
