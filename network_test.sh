@@ -24,6 +24,7 @@ done
 if [ $? != 0 ] 
 then
 	echo "No network... rebooting" 
+   ## ATTENTION 
   	#sudo /sbin/shutdown -r now
 fi
 
