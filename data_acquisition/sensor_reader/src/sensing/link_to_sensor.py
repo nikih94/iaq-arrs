@@ -69,13 +69,12 @@ class Sensor:
 
     def log_raw(self, data):
         data = decoding_sensor.decode_all_to_hex(data)
-        print(data)
         data_string = ''
         for el in data:
             data_string = data_string + str(el)
         # create the JSON object with datetime
         raw_line = {
-            "date": datetime.datetime.now(),
+            "date": datetime.now().isoformat(),
             "count": str(self.r_counter),
             "raw_data": data_string
         }
