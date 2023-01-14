@@ -78,10 +78,12 @@ class Sensor:
             "count": str(self.r_counter),
             "raw_data": data_string
         }
+        print("xread")
         with open(self.raw_log_file, 'a') as outfile:
             line = json.dumps(raw_line, cls=file_manager.DateTimeEncoder)
             line = "\n" + line
             outfile.write(line)
+        print("yread")
         if self.r_counter % self.t_limit == 0:
             file_manager.truncate_file(
                 self.raw_log_file, self.sensor_lines)  # 00)  # ten days
@@ -108,12 +110,10 @@ class Sensor:
         except Exception as e:
             self.logger.error("Failed to decode registers: "+str(e))
             raise
-        print("xread")
         sensor_data.append(self.get_timestamp())
         print(sensor_data)
         self.raw_count()
         if self.r_counter % self.w_limit == 0:
-            print("yread")
             self.log_raw(res)
         print("zread")
         return sensor_data
