@@ -34,7 +34,7 @@ class InfluxErrManager(InfluxDB):
     """
     Save errors to db
     """
-
+    @retry(tries=2, delay=5)
     def save_sensor_error(self, log):
         try:
             # --setup from config file
@@ -79,7 +79,7 @@ class InfluxErrManager(InfluxDB):
     """
     Save errors to db
     """
-
+    @retry(tries=2, delay=5)
     def save_db_error(self, log):
         try:
             # --setup from config file
