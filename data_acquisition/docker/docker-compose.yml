@@ -8,14 +8,14 @@ services:
             - '/dev/serial0:/dev/serial0'
         build: sensor-reader/.
         restart: always
-        command: sh -c "cd ./iaq-arrs/src && python main.py"
+        command: sh -c "cd ./iaq-arrs && python main.py"
         depends_on:
             #prevents container to start before other container, on which it depends
             - database
         networks:
             - mynet
         volumes:
-            - ./../sensor_reader:/iaq-arrs/
+            - ./../src:/iaq-arrs/
             - ./../configuration.ini:/iaq-arrs/configuration.ini
     database:
         image: mariadb:10.4.24
