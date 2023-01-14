@@ -105,7 +105,15 @@ class DB_writer(Thread):
             self.influx.save_sensor_error(queue_item.value)
 
     def save_data_item(self, queue_item):
-        self.save_to_influx(queue_item)
+        sensor_data = None
+        try:
+            sensor_data = self.influx.clean_data(queue_item.value)
+        except Exception as e:
+            self.logger.error(
+                "Error during data validation " + str(e))
+            pass
+        if sensor_data is not None:
+            self.save_to_influx(sensor_data)
         self.local_db.save_to_local_db(queue_item)
 
     """

@@ -40,4 +40,4 @@ def truncate_file(name, lines):
     proc = subprocess.Popen(command, shell=True)
     proc.wait()
     directory = os.getcwd()
-    print(directory)
+    # print(directory)
