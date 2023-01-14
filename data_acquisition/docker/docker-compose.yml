@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3.3"
 
 services:
     sensor-rx:
@@ -28,14 +28,13 @@ services:
         volumes:
             - ./database/my.cnf:/etc/mysql/my.cnf
             - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-            - mariadb-data:/var/lib/mysql
+        tmpfs:
+            - /var/lib/mysql
+            - /tmp
         ports:
+            #- 3306:3306
             - '127.0.0.1:3306:3306' #expose only to localhost
 
 networks:
     mynet:
         driver: bridge
-
-volumes:
-    mariadb-data:
-        external: true
