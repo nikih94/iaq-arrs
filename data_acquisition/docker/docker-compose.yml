@@ -8,7 +8,7 @@ services:
             - '/dev/serial0:/dev/serial0'
         build: sensor-reader/.
         restart: always
-        command: sh -c "ls /iaq-arrs && cd ./iaq-arrs/src && python main.py"
+        command: sh -c "cd ./iaq-arrs/src && python main.py"
         depends_on:
             #prevents container to start before other container, on which it depends
             - database

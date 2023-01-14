@@ -92,9 +92,9 @@ class SensorReader(Thread):
         if self.entry_counter == 5:
             l[3] = 'banana'
         elif self.entry_counter == 7:
-            l[10] == "kek"
+            l[10] = "kek"
         elif self.entry_counter == 9:
-            l[6] == "nul"
+            l[6] = "nul"
         d = DataItem(l, self.entry_counter)
         self.queue.put(d)
         self.count()
