@@ -66,14 +66,17 @@ class InfluxDB:
         digits = 4  # digits to round float numbers
         l = []
         for i in range(11):
-            if i == 10:  # test if timestamp is string!!
-                parse(sensor_data[i], fuzzy=False)
-                l.append(sensor_data[i])
-            elif i == 6:
-                if math.isnan(float(sensor_data[i])):
-                    l.append("NULL")
-            else:
-                l.append(round(float(sensor_data[i]), digits))
+            try:
+                if i == 10:  # test if timestamp is string!!
+                    parse(sensor_data[i], fuzzy=False)
+                    l.append(sensor_data[i])
+                elif i == 6:
+                    if math.isnan(float(sensor_data[i])):
+                        l.append("NULL")
+                else:
+                    l.append(round(float(sensor_data[i]), digits))
+            except:
+                raise
         return l
 
     """

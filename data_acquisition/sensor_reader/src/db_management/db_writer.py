@@ -64,7 +64,7 @@ class DB_writer(Thread):
         self.configuration = configuration
         self.influx = InfluxErrManager(self.configuration)
         db_e_logger.INFLUX = self.influx
-        self.logger = db_e_logger.get_logger("er_logger")
+        self.logger = db_e_logger.get_logger("db_err_logger")
         self.local_db = LocalDB(self.configuration, self.logger)
         pass
 
