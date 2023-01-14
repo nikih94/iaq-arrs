@@ -1,18 +1,48 @@
+import functools
 
 
 class QueueItem:
 
-    description = None
+    priority = None
 
-    message = None
+    entry_counter = None
 
-    measurements = []
+    value = None
 
-    def __init__(self, description, value):
-        if description == "sensor_reading":
-            self.description = description
-            self.measurements = value
-        else:
-            self.description = description
-            self.message = value
-        pass
+    def __init__(self, value, entry_counter):
+        self.value = value
+        self.entry_counter = entry_counter
+
+    def __lt__(self, other):
+        return (self.priority, self.entry_counter) < (other.priority, other.entry_counter)
+
+    def __eq__(self, other):
+        return (self.priority, self.entry_counter) == (other.priority, other.entry_counter)
+
+
+class MainItem(QueueItem):
+
+    def __init__(self, value, entry_counter):
+        super().__init__(value, entry_counter)
+        self.priority = 1
+
+
+class CriticalError(QueueItem):
+
+    def __init__(self, value, entry_counter):
+        super().__init__(value, entry_counter)
+        self.priority = 1
+
+
+class SensorReadError(QueueItem):
+
+    def __init__(self, value, entry_counter):
+        super().__init__(value, entry_counter)
+        self.priority = 6
+
+
+class DataItem(QueueItem):
+
+    def __init__(self, value, entry_counter):
+        super().__init__(value, entry_counter)
+        self.priority = 3

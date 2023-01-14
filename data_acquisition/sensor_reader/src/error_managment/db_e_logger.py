@@ -20,14 +20,14 @@ Send log to central DB
 """
 
 
-class DB_log_handler(logging.Handler):
+INFLUX = None
 
-    db_queue = None
+
+class Writer_logger(logging.Handler):
 
     logger_type = "db-logger"
 
-    def __init__(self, db_queue):
-        self.db_queue = db_queue
+    def __init__(self):
         logging.Handler.__init__(self)
         self.setLevel(logging.ERROR)
         self.setFormatter(FORMATTER)
@@ -38,7 +38,7 @@ class DB_log_handler(logging.Handler):
         message = '' + str(log[0]) + '--' + str(log[1]) + ' at filename: ' + str(log[2]) + ' line number: ' + \
             str(log[3]) + ' fun name: ' + str(log[4]) + \
             ' with message: ' + str(log[5])
-        self.db_queue.put(QueueItem("error", message))
+        INFLUX.save_db_error(message)
 
 
 """
@@ -73,7 +73,7 @@ def get_logger(logger_name):
     # better to have too much log than not enough
     logger.addHandler(get_console_handler())
     logger.addHandler(get_file_handler())
-    logger.addHandler(DB_log_handler())
+    logger.addHandler(Writer_logger())
     # with this pattern, it's rarely necessary to propagate the error up to parent
     logger.propagate = False
     return logger

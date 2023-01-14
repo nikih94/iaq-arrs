@@ -7,7 +7,7 @@ from logging.handlers import TimedRotatingFileHandler
 from logging.handlers import RotatingFileHandler
 from pyrsistent import v
 from queue import Queue
-from db_management.queue_item import QueueItem
+from db_management.queue_item import SensorReadError
 
 
 FORMATTER = logging.Formatter(
@@ -20,25 +20,34 @@ Send log to central DB
 """
 
 
-class DB_log_handler(logging.Handler):
+QUEUE = None
 
-    db_queue = None
+
+class DB_log_handler(logging.Handler):
 
     logger_type = "sensor-logger"
 
-    def __init__(self, db_queue):
-        self.db_queue = db_queue
+    entry_counter = 0
+
+    def __init__(self):
         logging.Handler.__init__(self)
         self.setLevel(logging.ERROR)
         self.setFormatter(FORMATTER)
 
+    def count(self):
+        if self.entry_counter > 1000000:
+            self.entry_counter = 0
+        else:
+            self.entry_counter += 1
+
     def emit(self, record):
+        self.count()
         log = [self.logger_type, record.__dict__['levelname'], record.__dict__['filename'], record.__dict__[
             'lineno'], record.__dict__['funcName'], record.__dict__['message']]
         message = '' + str(log[0]) + '--' + str(log[1]) + ' at filename: ' + str(log[2]) + ' line number: ' + \
             str(log[3]) + ' fun name: ' + str(log[4]) + \
             ' with message: ' + str(log[5])
-        self.db_queue.put(QueueItem("error", message))
+        QUEUE.put(SensorReadError(message, self.entry_counter))
 
 
 """

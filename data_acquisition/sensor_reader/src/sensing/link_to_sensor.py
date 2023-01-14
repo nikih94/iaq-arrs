@@ -4,6 +4,9 @@ from sensing import decoding_sensor, file_manager
 import json
 import datetime
 import math
+import time
+import calendar
+from datetime import datetime
 
 
 class Sensor:
@@ -100,6 +103,7 @@ class Sensor:
         except Exception as e:
             self.logger.error("Failed to decode registers: "+str(e))
             raise
+        sensor_data.append(self.get_timestamp())
         self.raw_count()
         if self.r_counter % self.w_limit == 0:
             self.log_raw(res)
@@ -110,6 +114,16 @@ class Sensor:
     """
 
     def dummy_read(self):
+        if self.r_counter == 0:
+            self.logger.error("Failed to read sensor: ")
+        self.raw_count()
         values = [23.2, 30.1, 4.1, 3.3, 1000.1,
-                  700.1, math.nan, 700.1, 234.4, 3343]
+                  700.1, math.nan, 700.1, 234.4, self.r_counter, self.get_timestamp()]
         return values
+
+    """
+    return tiumestamp
+    """
+
+    def get_timestamp(self):
+        return datetime.now().isoformat()
