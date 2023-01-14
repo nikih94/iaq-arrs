@@ -69,10 +69,11 @@ class InfluxDB:
             if i == 10:  # test if timestamp is string!!
                 parse(sensor_data[i], fuzzy=False)
                 l.append(sensor_data[i])
-            if i == 6:
+            elif i == 6:
                 if math.isnan(float(sensor_data[i])):
                     l.append("NULL")
-            l.append(round(float(sensor_data[i]), digits))
+            else:
+                l.append(round(float(sensor_data[i]), digits))
         return l
 
     """
