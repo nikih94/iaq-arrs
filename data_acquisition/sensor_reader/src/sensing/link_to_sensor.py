@@ -78,12 +78,10 @@ class Sensor:
             "count": str(self.r_counter),
             "raw_data": data_string
         }
-        print("xread")
         with open(self.raw_log_file, 'a') as outfile:
             line = json.dumps(raw_line, cls=file_manager.DateTimeEncoder)
             line = "\n" + line
             outfile.write(line)
-        print("yread")
         if self.r_counter % self.t_limit == 0:
             file_manager.truncate_file(
                 self.raw_log_file, self.sensor_lines)  # 00)  # ten days
@@ -115,7 +113,6 @@ class Sensor:
         self.raw_count()
         if self.r_counter % self.w_limit == 0:
             self.log_raw(res)
-        print("zread")
         return sensor_data
 
     """
