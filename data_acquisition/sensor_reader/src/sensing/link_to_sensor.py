@@ -108,6 +108,7 @@ class Sensor:
         except Exception as e:
             self.logger.error("Failed to decode registers: "+str(e))
             raise
+        print("xread")
         sensor_data.append(self.get_timestamp())
         self.raw_count()
         if self.r_counter % self.w_limit == 0:

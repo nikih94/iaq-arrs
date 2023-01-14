@@ -88,6 +88,7 @@ class SensorReader(Thread):
 
     @retry(tries=3, delay=10)
     def read_sensor(self):
+        print("read")
         l = self.sensor.read_sensor()
         print(l)
         d = DataItem(l, self.entry_counter)
