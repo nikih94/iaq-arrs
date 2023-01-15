@@ -3,7 +3,8 @@
 . ./configuration.sh
 
 
-echo -n "version --" && cat "/home/${whoami}/iaq-arrs/version"
+echo -n "version --"
+cat /home/$(whoami)/iaq-arrs/version
 
 echo -n "user --"
 whoami
@@ -27,7 +28,7 @@ echo -n "docker status --"
 systemctl status docker | grep "Active:"
 
 echo -n "setup_iaq_monitoring.service status --"
-systemctl status setup_iaq_monitoring.service | grep "Active:\|Process:"
+systemctl status setup_iaq_monitoring.service | grep "Active:\|Process:" | grep -E --color 'active|'
 
 
 echo -n "collect_data.service status --"
