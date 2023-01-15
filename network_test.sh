@@ -12,9 +12,9 @@ do
    ((i=i+1))
    killall dhclient
    sleep 1
-   /sbin/ifdown --force wlan0
+   /sbin/ifconfig wlan0 down 
    sleep 10
-   /sbin/ifup wlan0
+   /sbin/ifconfig wlan0 up
    sleep 10
    ping -c4 8.8.8.8 > /dev/null
 done
@@ -25,7 +25,7 @@ if [ $? != 0 ]
 then
 	echo "No network... rebooting" 
    ## ATTENTION 
-  	#sudo /sbin/shutdown -r now
+  	#sudo sync && sudo /sbin/shutdown -r now
 fi
 
 

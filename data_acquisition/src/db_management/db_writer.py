@@ -10,6 +10,8 @@ from time import sleep
 from error_managment import db_e_logger
 from retry import retry
 from db_management.local_db_manager import LocalDB
+from urllib3.connection import ConnectTimeoutError, ConnectionError
+from influxdb_client.rest import ApiException
 
 
 """
@@ -124,7 +126,26 @@ class DB_writer(Thread):
     def save_to_influx(self, queue_item):
         try:
             self.influx.save_to_central_db(queue_item)
+        except ConnectTimeoutError as e:
+            # connection timeout retry again
+            # do not log
+            raise
+        except ApiException as e:
+            status = e.status  # status code of the HTTP response
+            # check if the status code is 4xx - client error!!
+            if status != 404 and status != 408 and status != 429 and (status > 399 and status < 500):
+                # log the error and return without retry
+                self.logger.error(
+                    "Error during central-INFLUX db insertion: " + str(e) + " data: " + " ".join(str(x) for x in queue_item.value))
+                return
+            else:
+                # log the error
+                self.logger.error(
+                    "Error during central-INFLUX db insertion: " + str(e) + " data: " + " ".join(str(x) for x in queue_item.value))
+                raise
         except Exception as e:
+            # other unknown errors that are not because of the client
+            # log them and raise exception to retry
             self.logger.error(
                 "Error during central-INFLUX db insertion: " + str(e) + " data: " + " ".join(str(x) for x in queue_item.value))
             raise
