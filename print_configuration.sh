@@ -3,8 +3,7 @@
 . ./configuration.sh
 
 
-echo -n "version --"
-cat /home/${whoami}/iaq-arrs/version
+echo -n "version --" && cat "/home/${whoami}/iaq-arrs/version"
 
 echo -n "user --"
 whoami
