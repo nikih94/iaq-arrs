@@ -11,7 +11,7 @@ txt_blue="\033[36m"   # Blue
 txt_reset="\033[0m"   # Reset the prompt back to the default color
 
 echo -n "version --"
-echo "$txt_red" $(cat /home/$(whoami)/iaq-arrs/version)
+echo -e "$txt_red" $(cat /home/$(whoami)/iaq-arrs/version) "$txt_reset"
 
 echo -n "user --"
 whoami
