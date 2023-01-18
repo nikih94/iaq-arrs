@@ -11,7 +11,7 @@ txt_blue="\033[36m"   # Blue
 txt_reset="\033[0m"   # Reset the prompt back to the default color
 
 echo -n "version --"
-echo -e "$txt_red" $(cat /home/$(whoami)/iaq-arrs/version) "$txt_reset"
+echo -e "$txt_blue" $(cat /home/$(whoami)/iaq-arrs/version) "$txt_reset"
 
 echo -n "user --"
 whoami
@@ -31,8 +31,8 @@ echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
 
 
-echo -n "docker status --"
-systemctl status docker | grep "Active:" | grep -E --color 'Active|'
+echo -n "docker satus --"
+systemctl status docker | grep "Active:" 
 systemctl status docker | grep "Active:" | grep " active "
 
 if (($? > 0)); then
@@ -45,7 +45,7 @@ fi
 echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
 echo -n "setup_iaq_monitoring.service status --"
-systemctl status setup_iaq_monitoring.service | grep "Active:\|Process:" | grep -E --color 'Active|'
+systemctl status setup_iaq_monitoring.service | grep "Active:\|Process:" 
 systemctl status setup_iaq_monitoring.service | grep "Active:" | grep " failed "  
 
 if (($? > 0)); then
@@ -58,7 +58,7 @@ echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
 
 echo -n "collect_data.service status --"
-systemctl status collect_data.service | grep "Active:\|Process:" | grep -E --color 'Active|'
+systemctl status collect_data.service | grep "Active:\|Process:" 
 systemctl status collect_data.service | grep "Active:" | grep " active "
 
 if (($? > 0)); then
@@ -72,7 +72,7 @@ fi
 echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
 echo -n "telegraf status --"
-systemctl status telegraf | grep "Active:" | grep -E --color 'Active|'
+systemctl status telegraf | grep "Active:" 
 systemctl status telegraf | grep "Active:" | grep " active "
 
 if (($? > 0)); then
@@ -85,7 +85,7 @@ fi
 echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
 echo -n "check_network.service status --"
-systemctl status check_network.service | grep "Active:\|Process:" | grep -E --color 'Active|'
+systemctl status check_network.service | grep "Active:\|Process:" 
 systemctl status check_network.service | grep "Active:" | grep " inactive "
 
 if (($? > 0)); then
@@ -97,7 +97,7 @@ fi
 echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
 echo -n "check_network.timer status --"
-systemctl status check_network.timer | grep "Active:\|Trigger:" | grep -E --color 'Active|'
+systemctl status check_network.timer | grep "Active:\|Trigger:" 
 systemctl status check_network.timer | grep "Active:" | grep " active "
 
 if (($? > 0)); then
@@ -119,7 +119,7 @@ echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
 
 echo -n "tunnel_to_ir.service status --"
-systemctl status tunnel_to_ir.service | grep "Active:" | grep -E --color 'Active|'
+systemctl status tunnel_to_ir.service | grep "Active:" 
 systemctl status tunnel_to_ir.service | grep "Active:" | grep " active "
 
 if (($? > 0)); then
