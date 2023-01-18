@@ -25,7 +25,7 @@ if [ $? != 0 ]
 then
 	echo "No network... rebooting" 
    ## ATTENTION 
-  	#sudo sync && sudo /sbin/shutdown -r now
+  	sudo sync && sudo /sbin/shutdown -r now
 fi
 
 
