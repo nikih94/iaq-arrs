@@ -155,7 +155,7 @@ echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 echo " --- overlay filesystem --- "
 
 
-less /boot/cmdline.txt | grep " boot=overlay "
+less /boot/cmdline.txt | grep "boot=overlay "
 
 
 
