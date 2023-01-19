@@ -30,7 +30,7 @@ class SensorReader(Thread):
     queue = None
 
     # time interval between taken measuraments in seconds
-    delta = 2.0
+    delta = 1.0
 
     # The scheduler
     s = None

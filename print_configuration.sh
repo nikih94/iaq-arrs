@@ -175,7 +175,7 @@ dmesg | grep "Set hardware watchdog to 14s."
 if (($? > 0)); then
   echo -e "$txt_red""\n FAIL! There is a problem""$txt_reset"
 else
-  echo -e "$txt_green""\n enabled !\n""$txt_reset"
+  echo -e "$txt_green""\n Watchdog enabled !\n""$txt_reset"
 fi
 
 echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
