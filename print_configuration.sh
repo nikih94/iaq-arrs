@@ -6,6 +6,9 @@
 . ./iaq-arrs/configuration.sh
 
 
+cd ./iaq-arrs/
+
+
 # Colors
 txt_red="\033[31m"    # Red
 txt_green="\033[32m"  # Green
@@ -28,8 +31,22 @@ date
 echo -n "ip --"
 hostname -I | awk '{print $1}'
 
+echo " --- git branch --- "
+
+git branch --show-current | grep production
+
+if (($? > 0)); then
+  echo -e "$txt_yellow"$(git branch --show-current)"$txt_reset"
+else
+  echo -e "$txt_green""production""$txt_reset"
+fi
+
+
+echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
+
+
 echo " --- connection --- "
-iw dev
+/usr/sbin/iw dev
 echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
 
@@ -149,3 +166,16 @@ fi
 
 echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
 
+echo " --- WATCHDOG --- "
+
+
+
+dmesg | grep "Set hardware watchdog to 14s."
+
+if (($? > 0)); then
+  echo -e "$txt_red""\n FAIL! There is a problem""$txt_reset"
+else
+  echo -e "$txt_green""\n enabled !\n""$txt_reset"
+fi
+
+echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
