@@ -2,6 +2,9 @@
 
 . ./configuration.sh
 
+#Load the configuration variables
+. ./iaq-arrs/configuration.sh
+
 
 # Colors
 txt_red="\033[31m"    # Red
