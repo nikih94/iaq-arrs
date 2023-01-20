@@ -51,7 +51,7 @@ After=network-online.target
 [Service]
 Type=oneshot
 WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/
-ExecStart=/bin/bash -c "runuser -l ${USER_ON_RASPI} -c "\""cd iaq-arrs && git pull"\"""
+ExecStart=/bin/bash -c "runuser -l ${USER_ON_RASPI} -c "\""cd iaq-arrs && /usr/bin/git pull"\"""
 ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/setup.sh" 
 ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/enable.sh" 
 ExecStart=/bin/bash -c "chmod 4755 /usr/sbin/reboot" 
