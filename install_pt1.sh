@@ -47,6 +47,6 @@ sudo rm get-docker.sh
 
 
 #reboot 
-sudo reboot
+sudo sync && sudo /sbin/shutdown -r now
 
 #nice work
