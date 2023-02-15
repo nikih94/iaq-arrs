@@ -12,4 +12,4 @@ echo "The system was reconfigured, now rebooting"
 
 touch ./status/configured.tmp
 
-sudo sync && sudo /sbin/shutdown -r now
+sync && /sbin/shutdown -r now
