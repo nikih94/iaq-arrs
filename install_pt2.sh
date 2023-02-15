@@ -54,6 +54,7 @@ WorkingDirectory=/home/${USER_ON_RASPI}/iaq-arrs/
 ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/setup.sh" 
 ExecStart=/bin/bash -c "./data_acquisition/setup_scripts/enable.sh" 
 ExecStart=/bin/bash -c "chmod 4755 /usr/sbin/reboot" 
+ExecStart=/bin/bash -c "chmod 4755 /usr/sbin/sync" 
 ExecStop=/bin/bash -c "runuser -l ${USER_ON_RASPI} -c "\""./iaq-arrs/verify_status.sh"\"""
 
 [Install]
@@ -135,6 +136,6 @@ sudo rm /home/${USER_ON_RASPI}/status/configured.tmp
 ####
 
 
-sudo enable docker-compose daemon
+sudo systemctl enable docker-compose daemon
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
