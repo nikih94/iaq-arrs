@@ -17,9 +17,6 @@ txt_yellow="\033[33m" # Yellow
 txt_blue="\033[36m"   # Blue
 txt_reset="\033[0m"   # Reset the prompt back to the default color
 
-echo -n "version --"
-echo -e "$txt_blue" $(cat /home/$(whoami)/iaq-arrs/version) "$txt_reset"
-
 echo -n "user --"
 whoami
 
@@ -41,6 +38,10 @@ if (($? > 0)); then
 else
   echo -e "$txt_green""production""$txt_reset"
 fi
+
+
+echo -n "version --"
+git describe --tags
 
 
 echo " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
