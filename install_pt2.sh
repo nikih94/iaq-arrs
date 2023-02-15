@@ -134,7 +134,7 @@ sudo rm /home/${USER_ON_RASPI}/status/configured.tmp
 #
 ####
 
-
 sudo enable docker-compose daemon
+sudo systemctl enable docker-compose daemon
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
