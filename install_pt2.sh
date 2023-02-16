@@ -66,6 +66,7 @@ EOF
 cp ./configuration/setup_iaq_monitoring.service /etc/systemd/system/setup_iaq_monitoring.service
 
 #The previous script will run only if the file /home/${USER_ON_RASPI}/status/configured.tmp exists
+sudo rm -d -r /home/${USER_ON_RASPI}/status
 sudo runuser -l ${USER_ON_RASPI} -c "/usr/bin/mkdir /home/${USER_ON_RASPI}/status"
 
 #enable the service
