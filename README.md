@@ -182,7 +182,7 @@ cat raspi_public_key >>  /home/raspi/.ssh/authorized_keys
 Copy the server public key to the */ssh_keys* folder on the raspi. The server's ssh public key must be named *server.pub*. 
 
 
-## Create new user and disable autologin
+## Create new user and set permissions and disable autologin
 
 Please insert the SD card in the raspi and start the system.
 Enter the user shell in some way.
@@ -216,20 +216,23 @@ Change ownership with:
 sudo chown -R iaq-sensor: /home/iaq-sensor
 ```
 
-## Allow passwordless reboot for pssh
+### Allow passwordless reboot for pssh
+
+When updating the raspi remotely it can be useful to reboot the system through pssh without the password prompt.
 
 ```bash
 sudo visudo
 ```
-add the following line to the `visudo` file
+add the following lines to the `visudo` file
 
 ```plain
 iaq-sensor ALL=(root)  NOPASSWD: /usr/sbin/reboot ""
+iaq-sensor ALL=(root)  NOPASSWD: /usr/sbin/sync ""
 ```
 
 ### Mask the shutdown command
 
-The raspi cannot be turned off!!
+By executing this, the shutdown command is masked, and the raspi cannot be turned off!
 ```bash
 sudo systemctl mask poweroff.target
 ```
@@ -237,6 +240,7 @@ sudo systemctl mask poweroff.target
 
 ### Reconfigure boot user and autologin
 
+Prevent the user to turn off the raspberry PI, 
 Log in as the new user
 Run the command  
 ```bash 
@@ -339,7 +343,10 @@ network={
         proto=RSN
         key_mgmt=WPA-EAP
         pairwise=CCMP
+        group=CCMP TKIP
         eap=TTLS
+        altsubject_match="DNS:eduroam.upr.si;DNS:refosk2.upr.si"
+        ca_cert="/home/iaq-sensor/eduroam/ca.pem"
         identity="userID"
         anonymous_identity="anonymousID"
         password="********"
@@ -378,16 +385,29 @@ All variables are explained with comments.
 
 ### Installation scripts
 
-Run the two installation scripts respectively *install_pt1.sh* and *install_pt2.sh* the system will reboot between scripts.
+
+Run the first installation script with sudo: `sudo install_pt1.sh`
 <br>
-If *install_pt1.sh* does not work due to **apt update** not working, run the following commands:
-```
-sudo rm -r /var/lib/apt/lists/*
-sudo apt update
-```
-Then re-run *install_pt1.sh*.
+The script will perform the following:
+- update system
+- enable UART communication with sensor
+- set timezone to Europe/Rome
+- move ssh keys in the correct directory
+- install docker
 <br>
-After running the script *install_pt2.sh* check that telegraf was installed!! If it was not installed run the command `sudo apt-get update` and re-run the script *install_pt2.sh*.
+The system will automatically reboot after script execution. 
+<br> 
+<br>
+Run the second installation script with sudo: `sudo install_pt2.sh`
+<br>
+The script will perform the following:
+- add user to the docker group and install docker compose
+- install telegraf
+- create the unit file for setup & updates
+- create unit file for network check
+- enable systemd services
+<br>
+
 
 ### Installation of *network_latency* component
 
