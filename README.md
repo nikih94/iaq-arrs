@@ -33,10 +33,10 @@
 * [Technologies](#technologies)
 * [Version](#version)
 * [Documentation](#documentation) 
-* [Installation and Setup](#installation-and-setup)
+* [Image replication](#raspi-replication---base-image-creation)
 
 # General info
-IoT indoor air quality monitoring platform
+In this repo we give an IoT indoor air quality monitoring platform that relies on raspberry PI devices and IAQ sensors to collect data from several buildings. The system is designed for high availability, high reliability, high data quality, maintainability, and plug and play operation. We mean plug and play operation, since devices can be configured, and then shipped (postal service) to a remote building where an operator could deploy the device by simply attaching it to a power outlet. The device will configure itslef and start collecting data.
 
 
 # Acknowledgments
@@ -66,11 +66,46 @@ Version 1.0
 
 # System architecture
 
+
+<img
+  src="./example_images/lans.png"
+  alt="system description"
+  title="system description"
+  style="display: inline-block; margin: 0 auto; max-width: 200px;  height: 400px;">
+
+The upper figure shows the main components of the system architecture. The server that runs the [influxdb](https://www.influxdata.com/) database and the reverse proxy. Moreover, the figure shows devices consisting of the raspberry PI and the IAQ sensor that are located in different LAN networks and are communicating with the server.
+
+
+<br>
+The following figure shows a detailed description of the device component and the communication device-server.
+The device component consists of the data collection program, and several other components to ensure the high availability, maintainability and reliability of the system. 
+
+#### Data collection component
+
+The data collection component is a python program, running in a docker container. The component reads periodically the IAQ sensor via the UART protocol using the *minimalmodbus* library. The measurement is first converted into a value from the IEEE-754 representation, and then given to a queue. Another thread is reading the queue, and sending data to the server and the local database. The component relies on the queue to ensure that data is sent to the server even if the server cannot be reached for some time.
+
+#### ssh-tunnel
+
+An systemd service that maintains an ssh reverse tunnel to the server
+
+#### hardware watchdog
+
+The raspberry PI 4 has a hardware watchdog that can be enabled, to reboot the device if it gets stuck due to software or hardware issues it will restart the device even if the kernel crashes.
+
+#### local database
+
+An SQL database that stores the sensed data. We integrated the local database for future upgrade of the platform to allow distributed data processing.
+
+#### telegraf
+
+[Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) is a plugin-driven agent for collecting and sending metrics. It is used to collect the state of devices and report it to the server. 
+
 <img
   src="./example_images/iaq-monitoring.png"
   alt="iaq monitoring system architecture"
   title="iaq monitoring system architecture"
   style="display: inline-block; margin: 0 auto; max-width: 200px;  height: 500px;">
+
 
 
 # Documentation
@@ -80,8 +115,6 @@ Version 1.0
  * 1 raspberry Pi v4b + charger and case (extra hole to drill in the back of the red part over the SD card reader)
  * 1 Sensor
 
-
-# Raspi installation
 
 ## Raspi-to-sensor wiring
 
