@@ -501,17 +501,20 @@ sudo rm -rf /var/lib/docker/runtimes
 sudo raspi-config
 ```
 
+## Server setup
+
+Guidelines on the server configuration can be found [here](server-README.md)
+
+
+## Network latency plug-in
+
+The network latency plug-in allows to measure the latency of the communication among devices located in the same LAN network. 
+The plug-in was used in a gateway location optimization study, and can be easily enabled following the steps described [here](network-latency-README.md). 
 
 
 
 
 
-### Installation of *network_latency* component
-
-If the *network_latency* component is required, it must be installed at this step.
-Run the script *install_latency_monitor.sh*
-<br>
-For the correct functioning of the *network_latency* component the *netserver* must be running on the server. Please check this section to enable: [netserver](network-latency)
 
 # Raspi replication - Base image creation
 
