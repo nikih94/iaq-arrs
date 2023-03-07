@@ -8,7 +8,6 @@ Current influxDB version: *2.4.0*
 <br>
 Create users and create the following buckets: 
 * iaq
-* network_latency
 * rpi_stats
 
 
@@ -112,17 +111,6 @@ pi@localhost:22203
 pi@localhost:22204
 ```
 
-
-
-
-## Network latency
-
-To allow measure latency from sensors to serve, the netperf package must be installed `sudo apt-get install netperf` and the netserver must be running on port 12865.
-
-```netserver -4```
-
-Please ensure firewall rules allow the correct functioning.
-Netserver uses also other ports beside the 12865!!!
 
 
 
