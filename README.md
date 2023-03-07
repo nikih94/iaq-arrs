@@ -67,10 +67,10 @@ Version 1.0
 # System architecture
 
 <img
-  src="./example_images/sens-wiring-type1.jpg"
+  src="./example_images/iaq-monitoring.png"
   alt="iaq monitoring system architecture"
-  title=""iaq monitoring system architecture"
-  style="display: inline-block; margin: 0 auto; max-width: 300px">
+  title="iaq monitoring system architecture"
+  style="display: inline-block; margin: 0 auto; max-width: 200px;  height: 500px;">
 
 
 # Documentation
