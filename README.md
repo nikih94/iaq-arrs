@@ -64,29 +64,23 @@ The project builds on:
 
 Version 1.0
 
+# System architecture
+
+<img
+  src="./example_images/sens-wiring-type1.jpg"
+  alt="iaq monitoring system architecture"
+  title=""iaq monitoring system architecture"
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
+
 
 # Documentation
 
-## TO-DO
-
-### Hardware requirements
+## Hardware requirements
  * 1 16Gb microSD Class 10 card
  * 1 raspberry Pi v4b + charger and case (extra hole to drill in the back of the red part over the SD card reader)
  * 1 Sensor
 
-### Installation procedure
-Install the Raspberry Pi imager program, start it.
-Select "Use custom" and your raspi Pi image, to download [here](https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2022-04-07/2022-04-04-raspios-bullseye-arm64.img.xz)
 
-Click on the "configuration" icon (a little wheel in the bottom right corner) it opens a new window where you will select "always use" and then set your keyboard layout and language, enable SSH with "use password authentication" and leave the other options by default.
-
-Select your SD card and click "Write"
-After the writing is successful, insert the SD card into your RPI.
-
-Next, plug the sensor shown in the image below (Pins ...)
-
-Plug a keyboard, a mouse, a screen, and start the RPI. You can now configure your wifi connection.
-Once the wifi is connected, you are ready.
 # Raspi installation
 
 ## Raspi-to-sensor wiring
@@ -139,6 +133,15 @@ Install RaspiOS with raspi-imager.
 * Mandatory: arm64 image.
 * Use the image *2022-04-04-raspios-bullseye-arm64-lite.img.xz* OR *2022-04-04-raspios-bullseye-arm64.img.xz*
 
+<br>
+
+Install the Raspberry Pi imager program, start it.
+Select "Use custom" and your raspi Pi image, to download [here](https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2022-04-07/2022-04-04-raspios-bullseye-arm64.img.xz)
+
+Click on the "configuration" icon (a little wheel in the bottom right corner) it opens a new window where you will select "always use" and then set your keyboard layout and language, enable SSH with "use password authentication" and leave the other options by default.
+
+Select your SD card and click "Write"
+
 ### Allow UART communication
 
 Copy the script *To_copy_in_boot/my_config.txt* in the *boot* foler of the SD card.
@@ -149,6 +152,7 @@ This script will enable the UART communication and disable some things that may 
 
 Copy *To_copy_in_boot/ssh* in the *boot* foler of the SD card.<br>
 Configure and copy *To_copy_in_boot/wpa_supplicant.conf* in the *boot* folder of the SD card.
+Additional network configuration description, and eduroam access configuration can be found [here](#network-connection-using-wpa_supplicant)
 
 
 
@@ -285,12 +289,38 @@ Reboot required
 dmesg | grep watchdog
 ```
 
+## Network connection using wpa_supplicant
 
-## Eduroam network connection
+The raspberry pi needs internet access for the reverse proxy and to send data to the DB.
+<br>
+Here we describe the ordinary network configuration and the configuration for attaching to the [eduroam](https://eduroam.org/) network.
+
+### Ordinary network configuration for WPA secured networks
+
+Create the following wpa supplicant file with appropriately set *ssid* and *psk*, and move it to the /boot directory.
+<br>
+
+
+```bash
+country=IT # Your 2-digit country code
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+network={
+    ssid="networkID"
+    psk="password"
+    scan_ssid=1
+    key_mgmt=WPA-PSK
+}
+```
 
 
 
-### Step-1-modify the network interface file
+### Eduroam network configuration
+
+The eduroam service uses IEEE 802.1X EAP mode enterprise-grade authentication and a hierarchical system of RADIUS servers. Therefore, requires more configuration since the raspberry pi does not support advanced authentication methods out of the box. The configuration procedure was taken from the following [source](https://www.youtube.com/watch?v=oHVEwCEIzm4).  
+
+
+#### Step-1-modify the network interface file
 
 Modify the file *sudo nano /etc/network/interfaces* as follows:
 
@@ -314,7 +344,7 @@ iface wlan0 inet dhcp
 ```
 
 
-### Step-2-modify DHCP config file
+#### Step-2-modify DHCP config file
 
 Move to the bottom of the DHCP config file *sudo nano /etc/dhcpcd.conf* and add the following:
 
@@ -327,7 +357,7 @@ env wpa_supplicant_driver = wext, nl80211
 ```
 
 
-### Step-3-create the wpa_supplicant.conf file
+#### Step-3-create the wpa_supplicant.conf file
 
 The file must be located in: */etc/wpa_supplicant/wpa_supplicant.conf*
 
@@ -385,6 +415,7 @@ All variables are explained with comments.
 
 ### Installation scripts
 
+#### Installation script 1
 
 Run the first installation script with sudo: `sudo install_pt1.sh`
 <br>
@@ -396,8 +427,9 @@ The script will perform the following:
 - install docker
 <br>
 The system will automatically reboot after script execution. 
-<br> 
-<br>
+
+#### Installation script 2
+
 Run the second installation script with sudo: `sudo install_pt2.sh`
 <br>
 The script will perform the following:
@@ -409,6 +441,38 @@ The script will perform the following:
 <br>
 
 
+## Enable the overlay filesystem
+
+The overlay filesystem can be easily enabled using the *raspi-config* tool; however, there are issues with using docker. The default docker filesystem driver cannot work with overlayFS, and docker tries to rename `/var/lib/docker/runtimes` while renames are not permitted using overlayFS. 
+Therefore, using the overlayFS in combination with docker requires additional configuration. The following code sources from the following [github repo](https://github.com/asm/ansi_scroller#running-everything-on-a-read-only-filesystem).
+
+```bash
+#install the proper docker filesystem driver
+sudo apt install -y fuse-overlayfs
+#touch the docker config file
+sudo touch /etc/docker/daemon.json
+# enable the fuse-overlayfs
+echo '{
+  "storage-driver": "fuse-overlayfs"
+}' | sudo tee /etc/docker/daemon.json
+# Restart docker to pick up the changes
+sudo service docker restart
+# Start applications using docker
+sudo systemctl start collect_data.service
+# Now the important part: Stop docker and remove a directory it attempts to rename on boot.  OverlayFS doesn't support renaming.
+#stop all docker services
+sudo systemctl stop collect_data.service
+sudo service docker stop
+sudo rm -rf /var/lib/docker/runtimes
+# Run raspi-config and enable overlayfs and read only /boot in "Performance Options", then reboot
+sudo raspi-config
+```
+
+
+
+
+
+
 ### Installation of *network_latency* component
 
 If the *network_latency* component is required, it must be installed at this step.
@@ -416,14 +480,12 @@ Run the script *install_latency_monitor.sh*
 <br>
 For the correct functioning of the *network_latency* component the *netserver* must be running on the server. Please check this section to enable: [netserver](network-latency)
 
-## Raspi replication
-
-### Base image creation
+# Raspi replication - Base image creation
 
 To perform this section, you must have an SD card that was prepared following the steps in [raspi installation](raspi-installation)
 <br>
 
-#### Schedule a re-setup
+### Schedule a re-setup
 
 Delete the file /home/pi/status/configured.tmp
 ```
@@ -431,7 +493,7 @@ sudo rm /home/pi/status/configured.tmp
 ```
 This will schedule a reconfiguration at the next system startup.
 
-#### Create the base image
+### Create the base image
 
 Perform the following:
 * Insert the SD card in the laptop.
@@ -467,7 +529,7 @@ sudo dd if=./images/shrinked_test.img of=/dev/mmcblk0
 ```
 *Requires more or less 10mins*
 
-#### Setup the clone image
+### Setup the clone image
 
 Mount the SD and perform the following:
 <br>
