@@ -31,7 +31,7 @@
 
 
 <img
-  src="./example_images/20221118_140958.jpg"
+  src="./example_images/sensor-compr.jpg"
   alt="iaq sensor"
   title="iaq sensor"
   height=400px
