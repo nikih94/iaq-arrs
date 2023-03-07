@@ -28,6 +28,15 @@
 
 
 # Table of contents
+
+
+<img
+  src="./example_images/20221118_140958.jpg"
+  alt="iaq sensor"
+  title="iaq sensor"
+  height=400px
+  align="right">
+
 * [General info](#general-info)
 * [Acknowledgments](#acknowledgments)
 * [Technologies](#technologies)
@@ -35,7 +44,10 @@
 * [Documentation](#documentation) 
 * [Image replication](#raspi-replication---base-image-creation)
 
+  
+
 # General info
+  
 In this repo we give an IoT indoor air quality monitoring platform that relies on raspberry PI devices and IAQ sensors to collect data from several buildings. The system is designed for high availability, high reliability, high data quality, maintainability, and plug and play operation. We mean plug and play operation, since devices can be configured, and then shipped (postal service) to a remote building where an operator could deploy the device by simply attaching it to a power outlet. The device will configure itslef and start collecting data.
 
 
