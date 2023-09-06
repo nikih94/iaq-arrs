@@ -132,4 +132,4 @@ class Sensor:
     """
 
     def get_timestamp(self):
-        return datetime.now().isoformat()
+        return datetime.utcnow().isoformat() + 'Z'
